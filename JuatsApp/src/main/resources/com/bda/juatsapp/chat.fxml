@@ -67,13 +67,41 @@
             <Pane prefHeight="90.0" prefWidth="1080.0" style="-fx-border-color: transparent transparent #E0E0E0 #E0E0E0;" />
             <Pane layoutY="90.0" prefHeight="701.0" prefWidth="1080.0" style="-fx-border-color: #E0E0E0 transparent transparent #E0E0E0;">
                <children>
-                  <ScrollPane hbarPolicy="NEVER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="701.0" prefWidth="1080.0">
-                     <content>
-                        <Label alignment="CENTER" minHeight="50.0" minWidth="55.0" style="-fx-background-color: #31BA45; -fx-background-radius: 24 16 16 4;" text="Hola" textAlignment="CENTER" />
-                     </content>
+                  <ScrollPane hbarPolicy="NEVER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="701.0" prefWidth="1080.0" rotate="180.0">
                      <padding>
                         <Insets left="20.0" top="10.0" />
                      </padding>
+                     <content>
+                        <GridPane prefHeight="100.0" prefWidth="1030.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints fillHeight="false" minHeight="50.0" prefHeight="50.0" vgrow="ALWAYS" />
+                            <RowConstraints fillHeight="false" minHeight="50.0" prefHeight="50.0" vgrow="ALWAYS" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" minHeight="50.0" minWidth="55.0" prefHeight="50.0" rotate="180.0" style="-fx-background-color: #31BA45; -fx-background-radius: 24 16 16 4;" text="Hola!!!!!" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT">
+                                 <font>
+                                    <Font name="Inter Medium" size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding></Label>
+                              <Label alignment="CENTER" minHeight="50.0" minWidth="55.0" prefHeight="50.0" rotate="180.0" style="-fx-background-color: #E0E0E0; -fx-background-radius: 16 24 4 16;" text="Hola" textAlignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Inter Medium" size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
                   </ScrollPane>
                </children></Pane>
             <Pane layoutY="791.0" prefHeight="109.0" prefWidth="1080.0">
