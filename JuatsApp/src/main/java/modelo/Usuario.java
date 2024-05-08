@@ -12,7 +12,7 @@ public class Usuario
     private String telefono;
     private String fechaNacimiento;
     private String sexo;
-    private ImagenMetadata imagen;
+    private ImagenMetadata fotoPerfil;
     
     public Usuario(String nombre, String correo, String password, String telefono, String fechaNacimiento, String sexo) 
     {
@@ -80,12 +80,12 @@ public class Usuario
         this.sexo = sexo;
     }
 
-    public ImagenMetadata getImagen() {
-        return imagen;
+    public ImagenMetadata getFotoPerfil() {
+        return fotoPerfil;
     }
 
-    public void setImagen(ImagenMetadata imagen) {
-        this.imagen = imagen;
+    public void setFotoPerfil(ImagenMetadata fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
     
      @Override

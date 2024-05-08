@@ -6,7 +6,7 @@ import modelo.Usuario;
 
 public interface IUsuarioDAO 
 {
-    public List<Usuario> consultar() throws PersistenciaException;
-    public void guardar(Usuario usuario) throws PersistenciaException;
+    public List<Usuario> getAllUsuarios() throws PersistenciaException;
+    public void createUsuario(Usuario usuario) throws PersistenciaException;
 
 }

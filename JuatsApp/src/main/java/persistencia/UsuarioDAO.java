@@ -17,7 +17,7 @@ public class UsuarioDAO implements IUsuarioDAO
     }
     
     @Override
-    public List<Usuario> consultar() throws PersistenciaException
+    public List<Usuario> getAllUsuarios() throws PersistenciaException
     {
         List<Usuario> usuarios = new ArrayList<>();
         COLECCION.find().into(usuarios);
@@ -25,9 +25,8 @@ public class UsuarioDAO implements IUsuarioDAO
         return usuarios;
     }
     
-    
     @Override
-    public void guardar(Usuario usuario) throws PersistenciaException
+    public void createUsuario(Usuario usuario) throws PersistenciaException
     {
         COLECCION.insertOne(usuario);
     }
