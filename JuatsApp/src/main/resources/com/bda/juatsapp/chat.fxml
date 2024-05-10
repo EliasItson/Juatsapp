@@ -41,13 +41,28 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bda.juatsapp.ChatController">
    <children>
       <Pane prefHeight="900.0" prefWidth="400.0" style="-fx-border-color: transparent #E0E0E0 transparent transparent;">
          <children>
-            <Pane prefHeight="140.0" prefWidth="400.0" />
+            <Pane prefHeight="140.0" prefWidth="400.0">
+               <children>
+                  <TextField layoutX="25.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="352.0" promptText=" Buscar chats" style="-fx-border-color: #E0E0E0; -fx-background-radius: 8 8 8 8; -fx-border-radius: 8 8 8 8;">
+                     <font>
+                        <Font name="Inter Regular" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="48.0" />
+                     </padding>
+                  </TextField>
+                  <Circle fx:id="userPP" fill="DODGERBLUE" layoutX="53.0" layoutY="39.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+               </children></Pane>
             <ScrollPane hbarPolicy="NEVER" layoutY="139.0" prefHeight="761.0" prefWidth="400.0">
                <content>
                   <GridPane prefHeight="88.0" prefWidth="400.0" styleClass="conversation-pane">
