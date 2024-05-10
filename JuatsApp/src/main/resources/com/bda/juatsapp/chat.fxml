@@ -32,10 +32,12 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -44,9 +46,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bda.juatsapp.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1480.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bda.juatsapp.ChatController">
    <children>
-      <Pane prefHeight="900.0" prefWidth="400.0" style="-fx-border-color: transparent #E0E0E0 transparent transparent;">
+      <Pane prefHeight="900.0" prefWidth="400.0" styleClass="light-gray-right-border" stylesheets="@../../../styles/ParentStyle.css">
          <children>
             <Pane prefHeight="140.0" prefWidth="400.0">
                <children>
@@ -67,16 +69,21 @@
                         <Font name="Inter Medium" size="20.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="userMenu" fitHeight="45.0" fitWidth="45.0" layoutX="349.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
                </children></Pane>
-            <ScrollPane hbarPolicy="NEVER" layoutY="139.0" prefHeight="761.0" prefWidth="400.0">
+            <ScrollPane hbarPolicy="NEVER" layoutY="139.0" prefHeight="761.0" prefWidth="395.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css">
                <content>
-                  <GridPane prefHeight="88.0" prefWidth="400.0" styleClass="conversation-pane">
+                  <GridPane alignment="CENTER" prefHeight="88.0" prefWidth="400.0" stylesheets="@../../../styles/ParentStyle.css">
                     <columnConstraints>
                       <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints fillHeight="false" minHeight="88.0" prefHeight="88.0" vgrow="ALWAYS" />
+                        <RowConstraints fillHeight="false" minHeight="88.0" prefHeight="88.0" vgrow="ALWAYS" />
                     </rowConstraints>
+                     <styleClass>
+                        <String fx:value="conversation-pane" />
+                        <String fx:value="white-background" />
+                     </styleClass>
                   </GridPane>
                </content>
             </ScrollPane>
@@ -84,15 +91,15 @@
       </Pane>
       <Pane layoutX="400.0" prefHeight="900.0" prefWidth="1080.0" style="-fx-border-color: transparent transparent transparent #E0E0E0;">
          <children>
-            <Pane prefHeight="90.0" prefWidth="1080.0" style="-fx-border-color: transparent transparent #E0E0E0 #E0E0E0;" />
-            <Pane layoutY="90.0" prefHeight="701.0" prefWidth="1080.0" style="-fx-border-color: #E0E0E0 transparent transparent #E0E0E0;">
+            <Pane prefHeight="90.0" prefWidth="1080.0" styleClass="light-gray-bottom-left-border" stylesheets="@../../../styles/ParentStyle.css" />
+            <Pane layoutY="90.0" prefHeight="701.0" prefWidth="1080.0" styleClass="light-gray-top-left-border" stylesheets="@../../../styles/ParentStyle.css">
                <children>
-                  <ScrollPane hbarPolicy="NEVER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="701.0" prefWidth="1080.0" rotate="180.0">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="6.0" layoutY="7.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="687.0" prefWidth="1068.0" rotate="180.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css">
                      <padding>
                         <Insets left="20.0" top="10.0" />
                      </padding>
                      <content>
-                        <GridPane prefHeight="100.0" prefWidth="1030.0">
+                        <GridPane prefHeight="100.0" prefWidth="1030.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css">
                           <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>

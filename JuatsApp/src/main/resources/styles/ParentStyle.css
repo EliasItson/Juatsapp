@@ -1,0 +1,43 @@
+.white-background{
+	-fx-background-color: #ffffff
+}
+
+.light-gray-all-borders{
+	-fx-border-color: #E0E0E0 #E0E0E0 #E0E0E0 #E0E0E0
+}
+
+.light-gray-top-border{
+	-fx-border-color: #E0E0E0 transparent transparent transparent
+}
+
+.light-gray-right-border{
+	-fx-border-color:  transparent #E0E0E0 transparent transparent
+}
+
+.light-gray-bottom-border{
+	-fx-border-color: transparent transparent #E0E0E0 transparent
+}
+
+.light-gray-left-border{
+	-fx-border-color: transparent transparent transparent #E0E0E0 
+}
+
+.light-gray-top-right-border{
+	-fx-border-color: #E0E0E0 #E0E0E0 transparent transparent
+}
+
+.light-gray-top-left-border{
+	-fx-border-color: #E0E0E0 transparent transparent #E0E0E0
+}
+
+.light-gray-bottom-right-border{
+	-fx-border-color: transparent #E0E0E0 #E0E0E0 transparent
+}
+
+.light-gray-bottom-left-border{
+	-fx-border-color: transparent transparent #E0E0E0 #E0E0E0
+}
+
+.scroll-pane > .viewport {
+	-fx-background-color: #ffffff;
+}
