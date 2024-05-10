@@ -61,7 +61,12 @@
                         <Insets left="48.0" />
                      </padding>
                   </TextField>
-                  <Circle fx:id="userPP" fill="DODGERBLUE" layoutX="53.0" layoutY="39.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="userPP" fill="#e0e0e0" layoutX="53.0" layoutY="39.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Label fx:id="userDisplayName" layoutX="105.0" layoutY="26.0" text="Jorge Elias">
+                     <font>
+                        <Font name="Inter Medium" size="20.0" />
+                     </font>
+                  </Label>
                </children></Pane>
             <ScrollPane hbarPolicy="NEVER" layoutY="139.0" prefHeight="761.0" prefWidth="400.0">
                <content>
