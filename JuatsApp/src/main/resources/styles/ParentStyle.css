@@ -2,6 +2,34 @@
 	-fx-background-color: #ffffff
 }
 
+.label-right {
+	-fx-background-color: #31Ba45;
+	-fx-background-radius: 16 24 4 16;
+	-fx-alignment: center;
+	-fx-font-size: 16px;
+ -fx-font-family: "Inter Medium";
+ -fx-text-fill: white;
+	-fx-padding: 0 20px 0 20px;
+	-fx-min-width: 55px;
+	-fx-min-height: 50px;
+	-fx-max-width: 450px;
+	-fx-wrap-text: true;
+}
+
+.label-left {
+	-fx-background-color: #e0e0e0;
+	-fx-background-radius: 24 16 16 4;
+	-fx-alignment: center;
+	-fx-font-size: 16px;
+ -fx-font-family: "Inter Medium";
+ -fx-text-fill: black;
+	-fx-padding: 0 20px 0 20px;
+	-fx-min-width: 55px;
+	-fx-min-height: 50px;
+	-fx-max-width: 450px;
+	-fx-wrap-text: true;
+}
+
 .light-gray-all-borders{
 	-fx-border-color: #E0E0E0 #E0E0E0 #E0E0E0 #E0E0E0
 }

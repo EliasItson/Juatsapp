@@ -13,6 +13,7 @@ public class Usuario
     private String fechaNacimiento;
     private String sexo;
     private ImagenMetadata fotoPerfil;
+    private Boolean isDeleted;
     
     public Usuario(String nombre, String correo, String password, String telefono, String fechaNacimiento, String sexo) 
     {
@@ -87,6 +88,15 @@ public class Usuario
     public void setFotoPerfil(ImagenMetadata fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
     
      @Override
     public String toString() 

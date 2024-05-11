@@ -9,6 +9,7 @@ public class ImagenMetadata
     private String filename;
     private String contentType;
     private long length;
+    private Boolean isDeleted;
 
     public ImagenMetadata(ObjectId id, String filename, String contentType, long length) {
         this.id = id;
@@ -48,6 +49,15 @@ public class ImagenMetadata
     public void setLength(long length) {
         this.length = length;
     }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
     
     
 }

@@ -1,23 +1,21 @@
+
 package modelo;
 
-import java.time.LocalTime;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 
 public class Chat 
 {
     private ObjectId id;
-    private ObjectId emisorId;
-    private ObjectId receptorId;
-    private String contenido;
-    private LocalTime fechaTiempoEnvio;
+    private List<Usuario> miembros;
+    private List<Chat> mensajes;
+    private Boolean isDeleted;
 
-    public Chat(ObjectId emisorId, ObjectId receptorId, String contenido, LocalTime fechaTiempoEnvio) 
+    public Chat(List<Usuario> miembros, List<Chat> mensajes) 
     {
-        this.emisorId = emisorId;
-        this.receptorId = receptorId;
-        this.contenido = contenido;
-        this.fechaTiempoEnvio = fechaTiempoEnvio;
+        this.miembros = miembros;
+        this.mensajes = mensajes;
     }
 
     public ObjectId getId() {
@@ -28,45 +26,36 @@ public class Chat
         this.id = id;
     }
 
-    public ObjectId getEmisorId() {
-        return emisorId;
+    public List<Usuario> getMiembros() {
+        return miembros;
     }
 
-    public void setEmisorId(ObjectId emisorId) {
-        this.emisorId = emisorId;
+    public void setMiembros(List<Usuario> miembros) {
+        this.miembros = miembros;
     }
 
-    public ObjectId getReceptorId() {
-        return receptorId;
+    public List<Chat> getMensajes() {
+        return mensajes;
     }
 
-    public void setReceptorId(ObjectId receptorId) {
-        this.receptorId = receptorId;
+    public void setMensajes(List<Chat> mensajes) {
+        this.mensajes = mensajes;
     }
 
-    public String getContenido() {
-        return contenido;
+    public Boolean getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
-    public LocalTime getFechaTiempoEnvio() {
-        return fechaTiempoEnvio;
-    }
-
-    public void setFechaTiempoEnvio(LocalTime fechaTiempoEnvio) {
-        this.fechaTiempoEnvio = fechaTiempoEnvio;
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override
     public String toString() 
     {
-        return "Chat{" + "emisorId=" + emisorId + ", receptorId=" + receptorId + ", contenido=" + contenido + ", fechaTiempoEnvio=" + fechaTiempoEnvio + '}';
+        return "Mensaje{" + "miembros=" + miembros + ", mensajes=" + mensajes + '}';
     }
     
     
-    
-    
 }
+

@@ -3,23 +3,23 @@ package persistencia;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Chat;
+import modelo.Mensaje;
 
 
 public class ChatDAO implements IChatDAO
 {
-    private final MongoCollection<Chat> COLECCION;
+    private final MongoCollection<Mensaje> COLECCION;
     private final ConexionBD conexionBD = new ConexionBD();
     
     public ChatDAO()
     {
-        this.COLECCION = conexionBD.getBaseDatos().getCollection("chats", Chat.class);
+        this.COLECCION = conexionBD.getBaseDatos().getCollection("chats", Mensaje.class);
     }
     
     @Override
-    public List<Chat> consultar() throws PersistenciaException
+    public List<Mensaje> consultar() throws PersistenciaException
     {
-        List<Chat> chats = new ArrayList<>();
+        List<Mensaje> chats = new ArrayList<>();
         COLECCION.find().into(chats);
         
         return chats;
@@ -27,7 +27,7 @@ public class ChatDAO implements IChatDAO
     
     
     @Override
-    public void guardar(Chat chat) throws PersistenciaException
+    public void guardar(Mensaje chat) throws PersistenciaException
     {
         COLECCION.insertOne(chat);
     }
