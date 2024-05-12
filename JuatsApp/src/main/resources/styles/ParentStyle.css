@@ -2,9 +2,37 @@
 	-fx-background-color: #ffffff
 }
 
+.text_field{
+	-fx-border-color:#E0E0E0;
+	-fx-text-fill:#828282;
+	-fx-border-radius:8;
+	-fx-background-radius:8;
+	-fx-effect:null;
+	-fx-focus-color:transparent;
+	-fx-faint-focus-color:transparent;
+	-fx-background-insets:0;
+}
+
+.button{
+	-fx-border-color:transparent;
+	-fx-text-fill:#ffffff;
+	-fx-border-radius:8;
+	-fx-background-radius:8;
+	-fx-background-color:#31Ba45;
+	-fx-font-size: 16px;
+ -fx-font-family: "Inter Medium";
+}
+
+.button:pressed {
+	-fx-background-color: #31aa45; /* Set background color when pressed */
+	-fx-background-insets: 0; /* Remove background insets */
+	-fx-background-radius: 10; /* Set background radius */
+}
+
 .label-right {
 	-fx-background-color: #31Ba45;
 	-fx-background-radius: 16 24 4 16;
+	-fx-border-radius: 16 24 4 16;
 	-fx-alignment: center;
 	-fx-font-size: 16px;
  -fx-font-family: "Inter Medium";
@@ -19,6 +47,7 @@
 .label-left {
 	-fx-background-color: #e0e0e0;
 	-fx-background-radius: 24 16 16 4;
+	-fx-border-radius: 24 16 16 4;
 	-fx-alignment: center;
 	-fx-font-size: 16px;
  -fx-font-family: "Inter Medium";

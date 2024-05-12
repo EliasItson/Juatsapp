@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1480.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="900.0" prefWidth="1480.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css">
+         <children>
+            <Pane prefHeight="29.0" prefWidth="1480.0" style="-fx-background-color: #31ba45;">
+               <children>
+                  <Label layoutY="3.0" text="JUATSAPP">
+                     <font>
+                        <Font name="Inter SemiBold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children></Pane>
+            <Pane layoutY="890.0" prefHeight="10.0" prefWidth="1480.0" style="-fx-background-color: #31ba45;" />
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="640.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../media/A.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" layoutX="519.0" layoutY="239.0" prefHeight="352.0" prefWidth="400.0">
+               <children>
+                  <Label text="Ingresa a tu cuenta" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Inter SemiBold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Inserta tus datos para acceder a tu cuenta">
+                     <font>
+                        <Font name="Inter Regular" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField prefHeight="40.0" prefWidth="400.0" promptText="email@dominio.com" styleClass="text_field" stylesheets="@../../../styles/ParentStyle.css">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Inter Medium" size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField prefHeight="40.0" prefWidth="400.0" promptText="********" styleClass="text_field" stylesheets="@../../../styles/ParentStyle.css">
+                     <font>
+                        <Font name="Inter Medium" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="400.0" stylesheets="@../../../styles/ParentStyle.css" text="Ingresar">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="400.0">
+                     <children>
+                        <Separator halignment="LEFT" prefHeight="1.0" prefWidth="70.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Separator>
+                        <Label alignment="CENTER" prefHeight="17.0" text="o si todavia no tienes una cuenta" textAlignment="CENTER" textFill="#828282">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Inter Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator halignment="RIGHT" prefHeight="1.0" prefWidth="70.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Button mnemonicParsing="false" prefHeight="40.0" text="Registrar">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
