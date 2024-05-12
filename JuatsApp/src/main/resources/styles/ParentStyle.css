@@ -2,7 +2,12 @@
 	-fx-background-color: #ffffff
 }
 
-.text_field{
+.combo-box{
+	-fx-prompt-text-fill:#E0E0E0;
+	-fx-text-fill:#828282;
+}
+
+.text-field{
 	-fx-border-color:#E0E0E0;
 	-fx-text-fill:#828282;
 	-fx-border-radius:8;
@@ -11,9 +16,38 @@
 	-fx-focus-color:transparent;
 	-fx-faint-focus-color:transparent;
 	-fx-background-insets:0;
+	-fx-font-size: 20px;
+ -fx-font-family: "Inter Medium";
 }
 
-.button{
+.password-field{
+	-fx-border-color:#E0E0E0;
+	-fx-text-fill:#828282;
+	-fx-border-radius:8;
+	-fx-background-radius:8;
+	-fx-effect:null;
+	-fx-focus-color:transparent;
+	-fx-faint-focus-color:transparent;
+	-fx-background-insets:0;
+	-fx-font-size: 20px;
+ -fx-font-family: "Inter Medium";
+}
+
+.date-picker{
+	-fx-border-color:#E0E0E0;
+	-fx-text-fill:#828282;
+	-fx-border-radius:8;
+	-fx-background-radius:8;
+	-fx-effect:null;
+	-fx-focus-color:transparent;
+	-fx-faint-focus-color:transparent;
+	-fx-background-insets:0;
+	-fx-font-size: 20px;
+ -fx-font-family: "Inter Medium";
+}
+
+
+.green-button{
 	-fx-border-color:transparent;
 	-fx-text-fill:#ffffff;
 	-fx-border-radius:8;
@@ -23,7 +57,7 @@
  -fx-font-family: "Inter Medium";
 }
 
-.button:pressed {
+.green-button:pressed {
 	-fx-background-color: #31aa45; /* Set background color when pressed */
 	-fx-background-insets: 0; /* Remove background insets */
 	-fx-background-radius: 10; /* Set background radius */
