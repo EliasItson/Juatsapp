@@ -11,11 +11,17 @@ public class ImagenMetadata
     private long length;
     private Boolean isDeleted;
 
+    public ImagenMetadata() 
+    {
+        this.isDeleted = false;
+    }
+
     public ImagenMetadata(ObjectId id, String filename, String contentType, long length) {
         this.id = id;
         this.filename = filename;
         this.contentType = contentType;
         this.length = length;
+        this.isDeleted = false;
     }
 
     public ObjectId getId() {
@@ -58,6 +64,9 @@ public class ImagenMetadata
         this.isDeleted = isDeleted;
     }
     
-    
+    public Boolean isEmpty()
+    {
+        return filename.isBlank();
+    }
     
 }

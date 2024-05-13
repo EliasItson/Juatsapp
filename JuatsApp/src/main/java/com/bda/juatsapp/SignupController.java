@@ -42,7 +42,7 @@ public class SignupController implements Initializable
         sexoUsuarioCmbBox.getItems().addAll("Hombre", "Mujer", "Gato", "Perro", "No Binario");
     }
     
-    public void registrarCuenta()
+    public void registrarCuenta() throws IOException
     {
         try
         {
@@ -53,6 +53,7 @@ public class SignupController implements Initializable
             LocalDate fechaNacimiento = fechaUsuarioDatePicker.getValue();
             String sexo = sexoUsuarioCmbBox.getValue();
             usuarioNegocio.createUsuario(nombre, correo, password, telefono, fechaNacimiento, sexo);
+            App.setRoot("login");
         }
         catch(NegocioException e)
         {

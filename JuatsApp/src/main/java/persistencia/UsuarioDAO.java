@@ -6,6 +6,7 @@ import static com.mongodb.client.model.Filters.and;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Usuario;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
@@ -36,15 +37,27 @@ public class UsuarioDAO implements IUsuarioDAO
     }
     
     @Override
-    public ObjectId validateCredentials(String correo, String password) throws PersistenciaException
+    public Usuario validateCredentials(String correo, String password) throws PersistenciaException
     {
         try
         {
-            Usuario usuario = new Usuario();
             Bson filter = and(Filters.eq("correo", correo), Filters.eq("password", password));
-            usuario = COLECCION.find(filter).first();
-
-            return usuario.getId();
+            return COLECCION.find(filter).first();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println(e.getMessage());
+            throw new PersistenciaException(e.getMessage());
+        }
+    }
+    
+    @Override
+    public Usuario getTrimmedUsuarioById(ObjectId usuarioId) throws PersistenciaException
+    {
+        try
+        {
+            Bson filter = and(Filters.eq("_id", usuarioId));
+            return COLECCION.find(filter).first();
         }
         catch(NullPointerException e)
         {

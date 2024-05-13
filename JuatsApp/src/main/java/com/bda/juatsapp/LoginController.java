@@ -2,19 +2,14 @@ package com.bda.juatsapp;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import modelo.Usuario;
 import negocio.NegocioException;
 import negocio.UsuarioNegocio;
 import org.bson.types.ObjectId;
@@ -45,10 +40,11 @@ public class LoginController implements Initializable
         {
             String correo = correoUsuarioTxtFld.getText();
             String password = passUsuarioPassFld.getText();
-            ObjectId loggedInUserId = usuarioNegocio.validateCredentials(correo, password);
+            Usuario loggedInUser = usuarioNegocio.validateCredentials(correo, password);
             FXMLLoader loader = App.setRoot("chat");
             ChatController controller = loader.getController();
-            controller.initData(loggedInUserId);
+            System.out.println(loggedInUser.toString());
+            controller.initData(loggedInUser);
         }
         catch(NegocioException e)
         {

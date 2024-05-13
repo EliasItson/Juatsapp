@@ -76,6 +76,11 @@
                         <Image url="@../../../media/search.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="userCodeLabel" layoutX="105.0" layoutY="51.0" stylesheets="@../../../styles/ParentStyle.css" text="#000000" textFill="#454545">
+                     <font>
+                        <Font name="Inter Medium" size="16.0" />
+                     </font>
+                  </Label>
                </children></Pane>
             <ScrollPane hbarPolicy="NEVER" layoutX="5.0" layoutY="139.0" prefHeight="761.0" prefWidth="390.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" vbarPolicy="NEVER">
                <content>
@@ -99,13 +104,13 @@
          <children>
             <Pane prefHeight="90.0" prefWidth="1080.0" styleClass="light-gray-bottom-left-border" stylesheets="@../../../styles/ParentStyle.css">
                <children>
-                  <Circle fx:id="openedChatPP" fill="#e0e0e0" layoutX="53.0" layoutY="44.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Label layoutX="99.0" layoutY="25.0" text="Sans Undertale">
+                  <Circle fx:id="openedChatPP" fill="#e0e0e0" layoutX="53.0" layoutY="44.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
+                  <Label layoutX="99.0" layoutY="25.0" text="Sans Undertale" visible="false">
                      <font>
                         <Font name="Inter Medium" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="99.0" layoutY="48.0" text="Activo" textFill="#31ba45">
+                  <Label layoutX="99.0" layoutY="48.0" text="Activo" textFill="#31ba45" visible="false">
                      <font>
                         <Font name="Inter Regular" size="16.0" />
                      </font>
@@ -129,7 +134,7 @@
                      </content>
                   </ScrollPane>
                </children></Pane>
-            <Pane layoutY="791.0" prefHeight="109.0" prefWidth="1080.0">
+            <Pane layoutY="791.0" prefHeight="109.0" prefWidth="1080.0" visible="false">
                <children>
                   <TextField fx:id="chatMsjTextField" layoutX="30.0" layoutY="34.0" prefHeight="40.0" prefWidth="1020.0" promptText="Escribe tu mensaje" style="-fx-border-color: #E0E0E0; -fx-background-radius: 8 8 8 8; -fx-border-radius: 8 8 8 8;">
                      <font>

@@ -14,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import modelo.Usuario;
+import negocio.NegocioException;
+import negocio.UsuarioNegocio;
 import org.bson.types.ObjectId;
 
 public class ChatController implements Initializable {
@@ -36,11 +39,23 @@ public class ChatController implements Initializable {
     private GridPane activeChatGrid;
     @FXML
     private ScrollPane activeChatScrollPane;
+    @FXML
+    private Label userCodeLabel;
     
     private ObjectId loggedInUserId;
+    private UsuarioNegocio usuarioNegocio;
+    private Usuario loggedInUser;
 
+    public void initData(Usuario usuario)
+    {
+        this.loggedInUser = usuario;
+        this.usuarioNegocio = new UsuarioNegocio();
+        updateUI();
+    }
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    { 
 
         URL imageUrl = getClass().getResource("/media/vera.png");
         if (imageUrl != null) {
@@ -50,7 +65,6 @@ public class ChatController implements Initializable {
             System.out.println("Image resource not found.");
         }
 
-        userDisplayName.setText("PEDE MEXICO");
 
         URL imageUrl2 = getClass().getResource("/media/Menu.png");
         if (imageUrl2 != null) {
@@ -62,9 +76,10 @@ public class ChatController implements Initializable {
 
     }
     
-    public void initData(ObjectId userId) 
+    public void updateUI()
     {
-        this.loggedInUserId = userId;
+        userDisplayName.setText(loggedInUser.getNombre());
+        userCodeLabel.setText("#" + loggedInUser.getCodigo());
     }
 
     public void sendMessage() {

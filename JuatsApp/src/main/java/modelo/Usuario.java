@@ -13,15 +13,16 @@ public class Usuario
     private String telefono;
     private LocalDate fecha_nacimiento;
     private String sexo;
+    private String codigo;
     private ImagenMetadata fotoPerfil;
     private Boolean isDeleted;
 
     public Usuario() 
     {
-        
+        this.isDeleted = false;
     }
     
-    public Usuario(String nombre, String correo, String password, String telefono, LocalDate fechaNacimiento, String sexo) 
+    public Usuario(String nombre, String correo, String password, String telefono, LocalDate fechaNacimiento, String sexo, String codigo) 
     {
         this.nombre = nombre;
         this.correo = correo;
@@ -29,6 +30,8 @@ public class Usuario
         this.telefono = telefono;
         this.fecha_nacimiento = fechaNacimiento;
         this.sexo = sexo;
+        this.codigo = codigo;
+        this.isDeleted = false;
     }
 
     public ObjectId getId() {
@@ -87,6 +90,14 @@ public class Usuario
         this.sexo = sexo;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public ImagenMetadata getFotoPerfil() {
         return fotoPerfil;
     }
@@ -102,13 +113,14 @@ public class Usuario
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-    
-    
-     @Override
-    public String toString() 
-    {
-        return "Usuario{" + "nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", telefono=" + telefono + ", fechaNacimiento=" + fecha_nacimiento + ", sexo=" + sexo + '}';
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", telefono=" + telefono + ", fecha_nacimiento=" + fecha_nacimiento + ", sexo=" + sexo + ", codigo=" + codigo + ", isDeleted=" + isDeleted + '}';
     }
+    
+    
+    
     
     
 }

@@ -2,6 +2,7 @@ package negocio;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 import modelo.Usuario;
 import org.bson.types.ObjectId;
 import persistencia.PersistenciaException;
@@ -40,9 +41,13 @@ public class UsuarioNegocio implements IUsuarioNegocio
     @Override
     public void createUsuario(String nombre, String correo, String password, String telefono, LocalDate fechaNacimiento, String sexo) throws NegocioException
     {
+        Random random = new Random();
+        int randomNumber = random.nextInt(16777216);
+        String codigo = String.format("%06X", randomNumber);
+        
         try 
         {
-            Usuario usuario = new Usuario( nombre, correo, password,  telefono, fechaNacimiento, sexo);
+            Usuario usuario = new Usuario( nombre, correo, password,  telefono, fechaNacimiento, sexo, codigo);
             if (usuario == null) 
             {
                 throw new NegocioException("No se proporciono un usuario valido");
@@ -64,13 +69,27 @@ public class UsuarioNegocio implements IUsuarioNegocio
     }
     
     @Override
-    public ObjectId validateCredentials(String correo, String password) throws NegocioException
+    public Usuario validateCredentials(String correo, String password) throws NegocioException
+    {
+        try 
+        {
+            return usuarioDAO.validateCredentials(correo, password);
+
+        } 
+        catch (PersistenciaException e) 
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        }
+    }
+    
+    @Override
+    public Usuario getTrimmedUsuarioById(ObjectId usuarioId) throws NegocioException
     {
         try 
         {
 
-            usuarioDAO.validateCredentials(correo, password);
-            return usuarioDAO.validateCredentials(correo, password);
+            return usuarioDAO.getTrimmedUsuarioById(usuarioId);
 
         } 
         catch (PersistenciaException e) 
