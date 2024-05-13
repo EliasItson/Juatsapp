@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import org.bson.types.ObjectId;
 
 
@@ -10,18 +11,23 @@ public class Usuario
     private String correo;
     private String password;
     private String telefono;
-    private String fechaNacimiento;
+    private LocalDate fecha_nacimiento;
     private String sexo;
     private ImagenMetadata fotoPerfil;
     private Boolean isDeleted;
+
+    public Usuario() 
+    {
+        
+    }
     
-    public Usuario(String nombre, String correo, String password, String telefono, String fechaNacimiento, String sexo) 
+    public Usuario(String nombre, String correo, String password, String telefono, LocalDate fechaNacimiento, String sexo) 
     {
         this.nombre = nombre;
         this.correo = correo;
         this.password = password;
         this.telefono = telefono;
-        this.fechaNacimiento = fechaNacimiento;
+        this.fecha_nacimiento = fechaNacimiento;
         this.sexo = sexo;
     }
 
@@ -65,12 +71,12 @@ public class Usuario
         this.telefono = telefono;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
+    public LocalDate getFecha_nacimiento() {
+        return fecha_nacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
     public String getSexo() {
@@ -101,7 +107,7 @@ public class Usuario
      @Override
     public String toString() 
     {
-        return "Usuario{" + "nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + '}';
+        return "Usuario{" + "nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", telefono=" + telefono + ", fechaNacimiento=" + fecha_nacimiento + ", sexo=" + sexo + '}';
     }
     
     

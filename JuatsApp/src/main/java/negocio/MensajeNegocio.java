@@ -10,9 +10,9 @@ public class MensajeNegocio implements IMensajeNegocio
 {
     MensajeDAO mensajeDAO;
     
-    public MensajeNegocio(MensajeDAO mensajeDAO)
+    public MensajeNegocio()
     {
-        this.mensajeDAO = mensajeDAO;
+        this.mensajeDAO = new MensajeDAO();
     }
     
     @Override
@@ -62,7 +62,7 @@ public class MensajeNegocio implements IMensajeNegocio
         {
             if (mensaje == null) 
             {
-                throw new NegocioException("No se proporciono una cuenta valida");
+                throw new NegocioException("No se proporciono un mensaje valido");
             }
 
             mensajeDAO.guardar(mensaje);

@@ -8,23 +8,23 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
-public class App extends Application {
 
+public class App extends Application 
+{
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("chat"), 1480, 900);
+        scene = new Scene(loadFXML("login"), 1480, 900);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    static FXMLLoader setRoot(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        scene.setRoot(fxmlLoader.load());
+        return fxmlLoader;
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import org.bson.types.ObjectId;
 
 public class ChatController implements Initializable {
 
@@ -35,6 +36,8 @@ public class ChatController implements Initializable {
     private GridPane activeChatGrid;
     @FXML
     private ScrollPane activeChatScrollPane;
+    
+    private ObjectId loggedInUserId;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,6 +60,11 @@ public class ChatController implements Initializable {
             System.out.println("Image resource not found.");
         }
 
+    }
+    
+    public void initData(ObjectId userId) 
+    {
+        this.loggedInUserId = userId;
     }
 
     public void sendMessage() {

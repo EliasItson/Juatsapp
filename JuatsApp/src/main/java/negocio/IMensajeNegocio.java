@@ -3,7 +3,6 @@ package negocio;
 import java.util.List;
 import modelo.Mensaje;
 import org.bson.types.ObjectId;
-import persistencia.PersistenciaException;
 
 
 public interface IMensajeNegocio 
