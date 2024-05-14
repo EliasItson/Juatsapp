@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -9,13 +10,19 @@ public class Chat
 {
     private ObjectId id;
     private List<Usuario> miembros;
-    private List<Chat> mensajes;
+    private List<Mensaje> mensajes;
     private Boolean isDeleted;
 
-    public Chat(List<Usuario> miembros, List<Chat> mensajes) 
+    public Chat()
+    {
+        
+    }
+    
+    public Chat(List<Usuario> miembros) 
     {
         this.miembros = miembros;
-        this.mensajes = mensajes;
+        this.mensajes = new ArrayList<>();
+        this.isDeleted = false;
     }
 
     public ObjectId getId() {
@@ -34,11 +41,11 @@ public class Chat
         this.miembros = miembros;
     }
 
-    public List<Chat> getMensajes() {
+    public List<Mensaje> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(List<Chat> mensajes) {
+    public void setMensajes(List<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
 

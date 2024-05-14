@@ -2,6 +2,49 @@
 	-fx-background-color: #ffffff
 }
 
+.highlighted-cell {
+	-fx-background-color: lightgray; /* Change the color to your desired highlight color */
+}
+
+.context-menu {
+	-fx-background-color: white; /* Set background color to white */
+	-fx-text-fill: black; /* Set text color to black */
+	-fx-border-color: black; /* Set border color to black */
+}
+
+.context-menu .menu-item {
+	-fx-background-color: white; /* Set background color of menu items to white */
+	-fx-text-fill: black; /* Set text color of menu items to black */
+}
+
+.context-menu .menu-item:hover {
+	-fx-background-color: lightgray; /* Set background color of hovered menu items */
+}
+
+.chat-list-circle-left{
+	-fx-fill: #e0e0e0;
+	-fx-stroke-width: 0;
+	-fx-radius: 35px;
+}
+
+.chat-list-imageview-right{
+	-fx-fit-width: 24px;
+	-fx-fit-height: 24px;
+}
+
+.chat-list-label-top{
+	-fx-max-width: 200px;
+	-fx-font-family: "Inter Medium";
+	-fx-font-size: 20px;
+}
+
+.chat-list-label-bottom{	
+	-fx-max-width: 240px;
+	-fx-font-family: "Inter Medium";
+	-fx-font-size: 16px;
+	-fx-text-fill:#454545
+}
+
 .combo-box{
 	-fx-prompt-text-fill:#E0E0E0;
 	-fx-text-fill:#828282;

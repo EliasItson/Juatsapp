@@ -84,13 +84,10 @@
                </children></Pane>
             <ScrollPane hbarPolicy="NEVER" layoutX="5.0" layoutY="139.0" prefHeight="761.0" prefWidth="390.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" vbarPolicy="NEVER">
                <content>
-                  <GridPane alignment="CENTER" prefHeight="88.0" prefWidth="400.0" stylesheets="@../../../styles/ParentStyle.css">
+                  <GridPane fx:id="chatsGridPane" alignment="CENTER" minHeight="88.0" prefWidth="390.0" stylesheets="@../../../styles/ParentStyle.css" vgap="20.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints fillWidth="false" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="390.0" />
                     </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints fillHeight="false" minHeight="88.0" prefHeight="88.0" vgrow="ALWAYS" />
-                    </rowConstraints>
                      <styleClass>
                         <String fx:value="conversation-pane" />
                         <String fx:value="white-background" />
@@ -105,12 +102,12 @@
             <Pane prefHeight="90.0" prefWidth="1080.0" styleClass="light-gray-bottom-left-border" stylesheets="@../../../styles/ParentStyle.css">
                <children>
                   <Circle fx:id="openedChatPP" fill="#e0e0e0" layoutX="53.0" layoutY="44.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
-                  <Label layoutX="99.0" layoutY="25.0" text="Sans Undertale" visible="false">
+                  <Label fx:id="activeChatUserName" layoutX="99.0" layoutY="25.0" text="Sans Undertale" visible="false">
                      <font>
                         <Font name="Inter Medium" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="99.0" layoutY="48.0" text="Activo" textFill="#31ba45" visible="false">
+                  <Label fx:id="activeChatStatus" layoutX="99.0" layoutY="48.0" text="Activo" textFill="#31ba45" visible="false">
                      <font>
                         <Font name="Inter Regular" size="16.0" />
                      </font>
@@ -118,7 +115,7 @@
                </children></Pane>
             <Pane layoutY="90.0" prefHeight="701.0" prefWidth="1080.0" styleClass="light-gray-top-left-border" stylesheets="@../../../styles/ParentStyle.css">
                <children>
-                  <ScrollPane fx:id="activeChatScrollPane" hbarPolicy="NEVER" layoutX="5.0" layoutY="5.0" prefHeight="691.0" prefWidth="1070.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="activeChatScrollPane" hbarPolicy="NEVER" layoutX="5.0" layoutY="13.0" prefHeight="691.0" prefWidth="1070.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" vbarPolicy="NEVER">
                      <content>
                         <GridPane fx:id="activeChatGrid" minHeight="50.0" prefWidth="1070.0" stylesheets="@../../../styles/ParentStyle.css" vgap="2.0">
                           <columnConstraints>
@@ -134,9 +131,9 @@
                      </content>
                   </ScrollPane>
                </children></Pane>
-            <Pane layoutY="791.0" prefHeight="109.0" prefWidth="1080.0" visible="false">
+            <Pane layoutY="791.0" prefHeight="109.0" prefWidth="1080.0">
                <children>
-                  <TextField fx:id="chatMsjTextField" layoutX="30.0" layoutY="34.0" prefHeight="40.0" prefWidth="1020.0" promptText="Escribe tu mensaje" style="-fx-border-color: #E0E0E0; -fx-background-radius: 8 8 8 8; -fx-border-radius: 8 8 8 8;">
+                  <TextField fx:id="chatMsjTextField" layoutX="30.0" layoutY="34.0" prefHeight="40.0" prefWidth="1020.0" promptText="Escribe tu mensaje" style="-fx-border-color: #E0E0E0; -fx-background-radius: 8 8 8 8; -fx-border-radius: 8 8 8 8;" visible="false">
                      <font>
                         <Font name="Inter Regular" size="16.0" />
                      </font>
@@ -144,12 +141,12 @@
                         <Insets left="50.0" right="50.0" />
                      </padding>
                   </TextField>
-                  <ImageView fx:id="imgButton" fitHeight="24.0" fitWidth="24.0" layoutX="45.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgButton" fitHeight="24.0" fitWidth="24.0" layoutX="45.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../../../media/imagesmall.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="sendButton" fitHeight="24.0" fitWidth="24.0" layoutX="1015.0" layoutY="43.0" onMouseClicked="#sendMessage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="sendButton" fitHeight="24.0" fitWidth="24.0" layoutX="1015.0" layoutY="43.0" onMouseClicked="#sendMessage" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../../../media/send_small.png" />
                      </image>

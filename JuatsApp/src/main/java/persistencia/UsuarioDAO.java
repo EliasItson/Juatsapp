@@ -65,4 +65,18 @@ public class UsuarioDAO implements IUsuarioDAO
             throw new PersistenciaException(e.getMessage());
         }
     }
+    
+    public Usuario getUsuarioByCodigo(String codigo) throws PersistenciaException
+    {
+        try
+        {
+            Bson filter = and(Filters.eq("codigo", codigo));
+            return COLECCION.find(filter).first();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println(e.getMessage());
+            throw new PersistenciaException(e.getMessage());
+        }
+    }
 }

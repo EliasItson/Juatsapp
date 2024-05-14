@@ -1,10 +1,10 @@
 package persistencia;
 
 import java.util.List;
-import modelo.Mensaje;
+import modelo.Chat;
 
 public interface IChatDAO 
 {
-    public List<Mensaje> consultar() throws PersistenciaException;
-    public void guardar(Mensaje chat) throws PersistenciaException;
+    public List<Chat> getAllChats() throws PersistenciaException;
+    public void createChat(Chat chat) throws PersistenciaException;
 }

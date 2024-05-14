@@ -9,5 +9,5 @@ public interface IMensajeNegocio
 {
     public List<Mensaje> getAllMensajes() throws NegocioException;
     public List<Mensaje> getMensajesByEmisor(ObjectId emisor) throws NegocioException;
-    public void guardar(Mensaje mensaje) throws NegocioException;
+    public Mensaje guardar(String mensaje, ObjectId emisorId) throws NegocioException;
 }

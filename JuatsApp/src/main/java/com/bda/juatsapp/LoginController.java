@@ -41,16 +41,22 @@ public class LoginController implements Initializable
             String correo = correoUsuarioTxtFld.getText();
             String password = passUsuarioPassFld.getText();
             Usuario loggedInUser = usuarioNegocio.validateCredentials(correo, password);
-            FXMLLoader loader = App.setRoot("chat");
-            ChatController controller = loader.getController();
-            System.out.println(loggedInUser.toString());
-            controller.initData(loggedInUser);
+            if(loggedInUser != null)
+            {
+                FXMLLoader loader = App.setRoot("chat");
+                ChatController controller = loader.getController();
+                controller.initData(loggedInUser, usuarioNegocio);
+            }
         }
         catch(NegocioException e)
         {
             System.out.println(e.getMessage());
         }
         catch(IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e)
         {
             System.out.println(e.getMessage());
         }

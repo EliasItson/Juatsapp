@@ -13,11 +13,19 @@ public class Mensaje
     private LocalTime fechaTiempoEnvio;
     private Boolean isDeleted;
 
+    public Mensaje() 
+    {
+        this.isDeleted = false;
+    }
+
+    
+    
     public Mensaje(ObjectId emisorId, String textoMensaje, LocalTime fechaTiempoEnvio) 
     {
         this.emisorId = emisorId;
         this.textoMensaje = textoMensaje;
         this.fechaTiempoEnvio = fechaTiempoEnvio;
+        this.isDeleted = false;
     }
     
     public Mensaje(ObjectId emisorId, ImagenMetadata imagen, LocalTime fechaTiempoEnvio) 

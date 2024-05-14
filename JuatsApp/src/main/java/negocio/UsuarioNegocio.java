@@ -98,4 +98,23 @@ public class UsuarioNegocio implements IUsuarioNegocio
             throw new NegocioException(e.getMessage());
         }
     }
+    
+    public Usuario getUsuarioByCodigo(String codigo) throws NegocioException
+    {
+        try 
+        {
+            return usuarioDAO.getUsuarioByCodigo(codigo);
+
+        } 
+        catch (PersistenciaException e) 
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        }
+    }
 }

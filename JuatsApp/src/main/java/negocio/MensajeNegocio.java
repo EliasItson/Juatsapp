@@ -1,5 +1,7 @@
 package negocio;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import modelo.Mensaje;
 import org.bson.types.ObjectId;
@@ -56,7 +58,7 @@ public class MensajeNegocio implements IMensajeNegocio
     }
     
     @Override
-    public void guardar(Mensaje mensaje) throws NegocioException
+    public Mensaje guardar(String mensaje, ObjectId emisorId) throws NegocioException
     {
         try 
         {
@@ -64,15 +66,12 @@ public class MensajeNegocio implements IMensajeNegocio
             {
                 throw new NegocioException("No se proporciono un mensaje valido");
             }
+            
+            Mensaje msj = new Mensaje(emisorId, mensaje, LocalTime.now());
 
-            mensajeDAO.guardar(mensaje);
+            return msj;
 
         } 
-        catch (PersistenciaException e) 
-        {
-            System.out.println(e.getMessage());
-            throw new NegocioException(e.getMessage());
-        }
         catch(NullPointerException e)
         {
             System.out.println(e.getMessage());
