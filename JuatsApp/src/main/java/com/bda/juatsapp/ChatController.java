@@ -155,7 +155,7 @@ public class ChatController implements Initializable {
         
         
 
-        URL imageUrl = getClass().getResource("/media/vera.png");
+        URL imageUrl = getClass().getResource("/media/car.png");
         if (imageUrl != null) {
             Image img = new Image(imageUrl.toExternalForm());
             userPP.setFill(new ImagePattern(img));
