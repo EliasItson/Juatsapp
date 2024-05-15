@@ -146,7 +146,7 @@
                         <Insets left="50.0" right="50.0" />
                      </padding>
                   </TextField>
-                  <ImageView fx:id="imgButton" fitHeight="24.0" fitWidth="24.0" layoutX="45.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                  <ImageView fx:id="imgButton" fitHeight="24.0" fitWidth="24.0" layoutX="45.0" layoutY="42.0" onMouseClicked="#sendImage" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../../../media/imagesmall.png" />
                      </image>

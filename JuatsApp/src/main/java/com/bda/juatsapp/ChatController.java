@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,6 +40,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Chat;
@@ -158,27 +160,53 @@ public class ChatController implements Initializable {
                 Collections.sort(sortedMsj, Comparator.comparing(Mensaje::getFechaTiempoEnvio));
                 for(Mensaje msj : sortedMsj)
                 {
-                    if(msj.getEmisorId().equals(loggedInUser.getId()))
+                    if(msj.getTextoMensaje() != null)
                     {
-                        Label mensaje = new Label(msj.getTextoMensaje());
-                        mensaje.getStyleClass().add("label-right");
-                        mensaje.setPrefWidth(Label.USE_COMPUTED_SIZE);
-                        mensaje.setPrefHeight(Label.USE_COMPUTED_SIZE);
-                        mensaje.setMaxHeight(Label.USE_PREF_SIZE);
-                        GridPane.setHalignment(mensaje, HPos.RIGHT);
-                        activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
-                        activeChatGrid.addRow(activeChatGrid.getRowCount(), mensaje);
+                        if(msj.getEmisorId().equals(loggedInUser.getId()))
+                        {
+                            Label mensaje = new Label(msj.getTextoMensaje());
+                            mensaje.getStyleClass().add("label-right");
+                            mensaje.setPrefWidth(Label.USE_COMPUTED_SIZE);
+                            mensaje.setPrefHeight(Label.USE_COMPUTED_SIZE);
+                            mensaje.setMaxHeight(Label.USE_PREF_SIZE);
+                            GridPane.setHalignment(mensaje, HPos.RIGHT);
+                            activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
+                            activeChatGrid.addRow(activeChatGrid.getRowCount(), mensaje);
+                        }
+                        else
+                        {
+                            Label mensaje = new Label(msj.getTextoMensaje());
+                            mensaje.getStyleClass().add("label-left");
+                            mensaje.setPrefWidth(Label.USE_COMPUTED_SIZE);
+                            mensaje.setPrefHeight(Label.USE_COMPUTED_SIZE);
+                            mensaje.setMaxHeight(Label.USE_PREF_SIZE);
+                            GridPane.setHalignment(mensaje, HPos.LEFT);
+                            activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
+                            activeChatGrid.addRow(activeChatGrid.getRowCount(), mensaje);
+                        }
                     }
-                    else
+                    else if(msj.getImagen() != null)
                     {
-                        Label mensaje = new Label(msj.getTextoMensaje());
-                        mensaje.getStyleClass().add("label-left");
-                        mensaje.setPrefWidth(Label.USE_COMPUTED_SIZE);
-                        mensaje.setPrefHeight(Label.USE_COMPUTED_SIZE);
-                        mensaje.setMaxHeight(Label.USE_PREF_SIZE);
-                        GridPane.setHalignment(mensaje, HPos.LEFT);
-                        activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
-                        activeChatGrid.addRow(activeChatGrid.getRowCount(), mensaje);
+                        if(msj.getEmisorId().equals(loggedInUser.getId()))
+                        {
+                            Image image = new Image(new ByteArrayInputStream(msj.getImagen()));
+                            ImageView msjImage = new ImageView(image);
+                            msjImage.setFitHeight(250);
+                            msjImage.setFitWidth(250);
+                            GridPane.setHalignment(msjImage, HPos.RIGHT);
+                            activeChatGrid.addRow(activeChatGrid.getRowCount(), msjImage);
+                            activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
+                        }
+                        else
+                        {
+                            Image image = new Image(new ByteArrayInputStream(msj.getImagen()));
+                            ImageView msjImage = new ImageView(image);
+                            msjImage.setFitHeight(250);
+                            msjImage.setFitWidth(250);
+                            GridPane.setHalignment(msjImage, HPos.LEFT);
+                            activeChatGrid.addRow(activeChatGrid.getRowCount(), msjImage);
+                            activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
+                        }
                     }
                 }
             }  
@@ -330,8 +358,11 @@ public class ChatController implements Initializable {
                 String latestMsgText;
                 if(latestMessage == null)
                     latestMsgText = "";
-                else
+                else if(latestMessage.getTextoMensaje() == null)
+                    latestMsgText = "Imagen";
+                else 
                     latestMsgText = latestMessage.getTextoMensaje();
+                    
                 
                 Label msjChatGridLbl = new Label(latestMsgText);
                 msjChatGridLbl.getStyleClass().add("chat-list-label-bottom");
@@ -443,6 +474,42 @@ public class ChatController implements Initializable {
             GridPane.setHalignment(msj, HPos.RIGHT);
             activeChatGrid.addRow(activeChatGrid.getRowCount(), msj);
             activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
+        }
+    }
+    
+    public void sendImage()
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Image File");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show open file dialog
+        File imageFile = fileChooser.showOpenDialog(App.getStage());
+        if (imageFile != null) 
+        {
+            try
+            {
+                byte[] imageData = Files.readAllBytes(imageFile.toPath());
+                Image image = new Image(new ByteArrayInputStream(imageData));
+                Mensaje mensaje = mensajeNegocio.guardar(imageData, loggedInUser.getId());
+                chatNegocio.updateChat(activeChat, mensaje);
+
+                ImageView msjImage = new ImageView(image);
+                msjImage.setFitHeight(250);
+                msjImage.setFitWidth(250);
+                GridPane.setHalignment(msjImage, HPos.RIGHT);
+                activeChatGrid.addRow(activeChatGrid.getRowCount(), msjImage);
+                activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
+            }
+            catch(IOException e)
+            {
+                System.out.println(e.getMessage());
+            } catch (NegocioException e) 
+            {
+                System.out.println(e.getMessage());
+            }
+            
         }
     }
 }

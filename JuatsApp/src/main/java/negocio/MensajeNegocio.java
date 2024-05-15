@@ -93,4 +93,27 @@ public class MensajeNegocio implements IMensajeNegocio {
             throw new NegocioException(e.getMessage());
         }
     }
+    
+    public Mensaje guardar(byte[] imagen, ObjectId emisorId) throws NegocioException {
+        try {
+            if (imagen == null) {
+                throw new NegocioException("No se proporcionó un mensaje válido");
+            }
+
+            Mensaje msj = new Mensaje(emisorId, imagen, LocalTime.now());
+
+            mensajeDAO.guardar(msj);
+            
+            return msj;
+
+        } catch (NullPointerException e) 
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        } catch (PersistenciaException e) 
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        }
+    }
 }
