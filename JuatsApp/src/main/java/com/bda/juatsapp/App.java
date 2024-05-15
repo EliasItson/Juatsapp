@@ -8,12 +8,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * La clase principal que inicia la aplicación JavaFX.
+ */
+public class App extends Application {
 
-public class App extends Application 
-{
     private static Scene scene;
     private static Stage stage;
 
+    /**
+     * Inicia la aplicación JavaFX.
+     *
+     * @param stage El escenario principal para esta aplicación, en el cual se puede establecer la escena de la aplicación.
+     * @throws IOException Si ocurre un error al cargar el archivo FXML.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         App.stage = stage;
@@ -24,22 +32,45 @@ public class App extends Application
         stage.show();
     }
 
+    /**
+     * Establece el archivo FXML raíz para la escena.
+     *
+     * @param fxml El nombre del archivo FXML que se va a cargar.
+     * @return El objeto FXMLLoader utilizado para cargar el archivo FXML.
+     * @throws IOException Si ocurre un error al cargar el archivo FXML.
+     */
     static FXMLLoader setRoot(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         scene.setRoot(fxmlLoader.load());
         return fxmlLoader;
     }
 
+    /**
+     * Carga el archivo FXML especificado.
+     *
+     * @param fxml El nombre del archivo FXML que se va a cargar.
+     * @return El nodo raíz del archivo FXML cargado.
+     * @throws IOException Si ocurre un error al cargar el archivo FXML.
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-    
-    public static Stage getStage()
-    {
+
+    /**
+     * Devuelve el escenario principal de la aplicación.
+     *
+     * @return El escenario principal de la aplicación.
+     */
+    public static Stage getStage() {
         return stage;
     }
 
+    /**
+     * El método principal que inicia la aplicación.
+     *
+     * @param args Los argumentos de línea de comandos.
+     */
     public static void main(String[] args) {
         launch();
     }

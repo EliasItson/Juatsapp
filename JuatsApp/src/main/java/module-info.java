@@ -1,3 +1,7 @@
+/**
+ * Módulo principal de la aplicación Juatsapp.
+ * Este módulo define las dependencias necesarias y especifica qué paquetes y clases deben ser accesibles desde fuera del módulo.
+ */
 module com.bda.juatsapp {
     requires javafx.controls;
     requires javafx.fxml;

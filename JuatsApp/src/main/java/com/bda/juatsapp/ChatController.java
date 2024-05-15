@@ -52,6 +52,10 @@ import negocio.NegocioException;
 import negocio.UsuarioNegocio;
 import org.bson.types.ObjectId;
 
+
+/**
+ * Controlador para la vista principal de chat.
+ */
 public class ChatController implements Initializable {
 
     @FXML
@@ -93,6 +97,12 @@ public class ChatController implements Initializable {
     private Chat activeChat;
     private MensajeNegocio mensajeNegocio;
 
+    /**
+     * Inicializa los datos del usuario y del negocio para el controlador.
+     *
+     * @param usuario         El usuario que ha iniciado sesión.
+     * @param usuarioNegocio  El negocio de usuario utilizado para operaciones de usuario.
+     */
     public void initData(Usuario usuario, UsuarioNegocio usuarioNegocio)
     {
         this.loggedInUser = usuario;
@@ -121,6 +131,12 @@ public class ChatController implements Initializable {
         
     }
     
+    /**
+     * Inicializa el controlador después de que su raíz de vista haya sido completamente procesada.
+     *
+     * @param url El localizador de recursos utilizado para encontrar la raíz del objeto.
+     * @param rb  El recurso de paquetes utilizado para localizar objetos.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
@@ -149,6 +165,10 @@ public class ChatController implements Initializable {
 
     }
     
+    /**
+     * Carga los mensajes del chat activo en la interfaz gráfica.
+     * Si el chat activo contiene mensajes, los ordena por tiempo de envío y los muestra en la ventana de chat.
+     */
     private void loadActiveChatMensajes()
     {
         activeChatGrid.getChildren().clear();
@@ -213,6 +233,10 @@ public class ChatController implements Initializable {
         }    
     }
     
+    /**
+     * Abre la ventana para subir una foto de perfil
+     * 
+     */
     private void openSubirImagen() {
         popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -231,6 +255,10 @@ public class ChatController implements Initializable {
         }
     }
     
+    /**
+     * Abre la ventana para crear un chat nuevo
+     * 
+     */
     private void openCrearChat() {
         popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -248,7 +276,11 @@ public class ChatController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+    /**
+     * Le asigna la foto de perfil al usuario
+     * 
+     * @param imageFile La imagen que selecciono el usuario
+     */
     public void uploadPP(File imageFile)
     {
         try
@@ -262,6 +294,9 @@ public class ChatController implements Initializable {
         }
     }
     
+    /**
+     * Actualiza la interfaz de usuario con los detalles del usuario conectado.
+     */
     public void updateUI()
     {
         userDisplayName.setText(loggedInUser.getNombre());
@@ -274,11 +309,21 @@ public class ChatController implements Initializable {
         }
     }
     
+    /**
+     * Regresa la foto de perfil del usuario
+     * 
+     * @return la foto de perfil de usuario
+     */
     public byte[] getUserPP()
     {
         return loggedInUser.getFoto_perfil();
     }
     
+    /**
+     * Crea un nuevo chat
+     * 
+     * @param codigo el codigo de usuario con el cual se va a chatear
+     */
     public void createChat(String codigo)
     {
         try
@@ -296,6 +341,9 @@ public class ChatController implements Initializable {
         
     }
     
+    /**
+     * Carga la lista de chats del usuario.
+     */
     public void loadChatList()
     {
         try
@@ -397,6 +445,10 @@ public class ChatController implements Initializable {
         }    
     }
     
+    /**
+     * Borra el chat activo
+     *
+     */
     public void deleteActiveChat()
     {
         openedChatPP.setVisible(false);
@@ -418,6 +470,10 @@ public class ChatController implements Initializable {
         }
     }
     
+    /**
+     * Hace visibles a los componentes del chat
+     * 
+     */
     public void setActiveChatVisible()
     {
         openedChatPP.setVisible(true);
@@ -429,6 +485,12 @@ public class ChatController implements Initializable {
         activeChatDeleteIcon.setVisible(true);
     }
     
+    /**
+     * Determina el chat activo
+     * 
+     * @param activeChatUsuario El usuario relacionado con el chat activo
+     * 
+     */
     public void setActiveChat(Usuario activeChatUsuario)
     {
         try
@@ -451,6 +513,10 @@ public class ChatController implements Initializable {
         }
     }
 
+    /**
+     * Manda un mensaje de texo al chat
+     * 
+     */
     public void sendMessage() 
     {
         if (!chatMsjTextField.getText().isBlank()) 
@@ -477,6 +543,10 @@ public class ChatController implements Initializable {
         }
     }
     
+    /**
+     * Manda una imagen al chat
+     * 
+     */
     public void sendImage()
     {
         FileChooser fileChooser = new FileChooser();
