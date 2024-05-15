@@ -9,7 +9,7 @@ public class Mensaje
     private ObjectId id;
     private ObjectId emisorId;
     private String textoMensaje;
-    private ImagenMetadata imagen;
+    private byte[] imagen;
     private LocalTime fechaTiempoEnvio;
     private Boolean isDeleted;
 
@@ -28,7 +28,7 @@ public class Mensaje
         this.isDeleted = false;
     }
     
-    public Mensaje(ObjectId emisorId, ImagenMetadata imagen, LocalTime fechaTiempoEnvio) 
+    public Mensaje(ObjectId emisorId, byte[] imagen, LocalTime fechaTiempoEnvio) 
     {
         this.emisorId = emisorId;
         this.imagen = imagen;
@@ -59,12 +59,12 @@ public class Mensaje
         this.textoMensaje = textoMensaje;
     }
 
-    public ImagenMetadata getImagen() 
+    public byte[] getImagen() 
     {
         return imagen;
     }
 
-    public void setImagen(ImagenMetadata imagen) 
+    public void setImagen(byte[] imagen) 
     {
         this.imagen = imagen;
     }

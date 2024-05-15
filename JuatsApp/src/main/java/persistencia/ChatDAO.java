@@ -44,6 +44,7 @@ public class ChatDAO implements IChatDAO
     {
         List<Bson> pipeline = new ArrayList<>();
             pipeline.add(Aggregates.match(Filters.elemMatch("miembros", Filters.eq("_id", usuario))));
+            pipeline.add(Aggregates.match(Filters.eq("isDeleted", false)));
             pipeline.add(Aggregates.project(Projections.fields(
                     Projections.include("miembros"),
                     Projections.include("mensajes"),
@@ -66,6 +67,13 @@ public class ChatDAO implements IChatDAO
     {
         Bson filter = Filters.eq("_id", chat.getId());
         Bson updateOperation = Updates.addToSet("mensajes", mensaje);
+        COLECCION.updateOne(filter, updateOperation);
+    }
+    
+    public void deleteChat(ObjectId chat) throws PersistenciaException
+    {
+        Bson filter = Filters.eq("_id", chat);
+        Bson updateOperation = Updates.set("isDeleted", true);
         COLECCION.updateOne(filter, updateOperation);
     }
 }

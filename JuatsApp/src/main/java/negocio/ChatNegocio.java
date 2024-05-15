@@ -108,4 +108,16 @@ public class ChatNegocio {
             throw new NegocioException(e.getMessage());
         }
     }
+    
+    public void deleteChat(ObjectId chat) throws NegocioException
+    {
+        try
+        {
+            chatDAO.deleteChat(chat);
+        }
+        catch(PersistenciaException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

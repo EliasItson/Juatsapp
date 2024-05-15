@@ -1,9 +1,12 @@
 package com.bda.juatsapp;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -27,7 +30,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -72,6 +78,8 @@ public class ChatController implements Initializable {
     private Label userCodeLabel;
     @FXML
     private GridPane chatsGridPane;
+    @FXML
+    private ImageView activeChatDeleteIcon;
     
     
     private UsuarioNegocio usuarioNegocio;
@@ -102,36 +110,12 @@ public class ChatController implements Initializable {
                 node.getStyleClass().remove("highlighted-cell");
             });
         });
-        
-//        chatsGridPane.setOnMouseClicked(event -> {
-//            if (event.getTarget() instanceof Node) {
-//                Node clickedNode = (Node) event.getTarget();
-//                System.out.println("Clicked target: " + clickedNode);
-//            }
-//        });
-        
-//        chatsGridPane.getChildren().forEach(node -> {
-//    node.setOnMouseClicked(event -> {
-//        // Check if the component is a GridPane containing the desired label
-//        if (node instanceof GridPane) {
-//            GridPane cell = (GridPane) node;
-//            for (Node component : cell.getChildren()) {
-//                // Check if the component is a label with the specified ID or CSS class
-//                if (component instanceof Label && component.getId().equals("chatId")) {
-//                    Label activeChatLabel = (Label) component;
-//
-//                    // Extract the text value of the specific label
-//                    String activeChatIdText = activeChatLabel.getText();
-//
-//                    // Do something with the text value
-//                    this.activeChatId = new ObjectId(activeChatIdText);
-//                    System.out.println(this.activeChatId.toString());
-//                    break;
-//                }
-//            }
-//        }
-//    });
-//});
+
+        chatMsjTextField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                sendMessage();
+            }
+        });
         
     }
     
@@ -155,13 +139,6 @@ public class ChatController implements Initializable {
         
         
 
-        URL imageUrl = getClass().getResource("/media/car.png");
-        if (imageUrl != null) {
-            Image img = new Image(imageUrl.toExternalForm());
-            userPP.setFill(new ImagePattern(img));
-        } else {
-            System.out.println("Image resource not found.");
-        }
 
 
         URL imageUrl2 = getClass().getResource("/media/Menu.png");
@@ -193,7 +170,7 @@ public class ChatController implements Initializable {
                         mensaje.setPrefHeight(Label.USE_COMPUTED_SIZE);
                         mensaje.setMaxHeight(Label.USE_PREF_SIZE);
                         GridPane.setHalignment(mensaje, HPos.RIGHT);
-                        activeChatScrollPane.setVvalue(1);
+                        activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
                         activeChatGrid.addRow(activeChatGrid.getRowCount(), mensaje);
                     }
                     else
@@ -204,7 +181,7 @@ public class ChatController implements Initializable {
                         mensaje.setPrefHeight(Label.USE_COMPUTED_SIZE);
                         mensaje.setMaxHeight(Label.USE_PREF_SIZE);
                         GridPane.setHalignment(mensaje, HPos.LEFT);
-                        activeChatScrollPane.setVvalue(1);
+                        activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
                         activeChatGrid.addRow(activeChatGrid.getRowCount(), mensaje);
                     }
                 }
@@ -224,7 +201,7 @@ public class ChatController implements Initializable {
             popupStage.setScene(popupScene);
             popupStage.show();
             UploadPPController uploadPPController = loader.getController();
-            uploadPPController.initData(this);
+            uploadPPController.initData(this, popupStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -248,10 +225,34 @@ public class ChatController implements Initializable {
         }
     }
     
+    public void uploadPP(File imageFile)
+    {
+        try
+        {
+            loggedInUser = usuarioNegocio.uploadPP(imageFile, loggedInUser.getId());
+            updateUI();
+        }
+        catch(NegocioException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void updateUI()
     {
         userDisplayName.setText(loggedInUser.getNombre());
         userCodeLabel.setText("#" + loggedInUser.getCodigo());
+            
+        if (loggedInUser.getFoto_perfil() != null) 
+        {
+            Image image = new Image(new ByteArrayInputStream(loggedInUser.getFoto_perfil()));
+            userPP.setFill(new ImagePattern(image));
+        }
+    }
+    
+    public byte[] getUserPP()
+    {
+        return loggedInUser.getFoto_perfil();
     }
     
     public void createChat(String codigo)
@@ -290,8 +291,6 @@ public class ChatController implements Initializable {
                     }
                 }
                 
-
-                
                 int rowIndex = chatsGridPane.getRowCount();
         
                 chatsGridPane.addRow(rowIndex);
@@ -309,6 +308,7 @@ public class ChatController implements Initializable {
                 
 
                 final int finalRowIndex = rowIndex;
+                final Usuario activeChatUsuario = usuarioChat;
 
                 Node cell = chatsGridPane.getChildren().stream()
                         .filter(node -> GridPane.getRowIndex(node) == finalRowIndex && GridPane.getColumnIndex(node) == 0)
@@ -317,7 +317,7 @@ public class ChatController implements Initializable {
                 if (cell != null) {
                     cell.setOnMouseClicked(event -> {
                         activeChatId = new ObjectId(chatId.getText());
-                        setActiveChat();
+                        setActiveChat(activeChatUsuario);
                         setActiveChatVisible();
                         loadActiveChatMensajes();
                         System.out.println(chatId.getText());
@@ -325,7 +325,19 @@ public class ChatController implements Initializable {
                     });
                 }
                 
-                Label msjChatGridLbl = new Label("...");
+                Mensaje latestMessage = null;
+                for (Mensaje msj : chat.getMensajes()) {
+                    if (latestMessage == null || msj.getFechaTiempoEnvio().isAfter(latestMessage.getFechaTiempoEnvio())) {
+                        latestMessage = msj;
+                    }
+                }
+                String latestMsgText;
+                if(latestMessage == null)
+                    latestMsgText = "";
+                else
+                    latestMsgText = latestMessage.getTextoMensaje();
+                
+                Label msjChatGridLbl = new Label(latestMsgText);
                 msjChatGridLbl.getStyleClass().add("chat-list-label-bottom");
                 GridPane.setValignment(msjChatGridLbl, VPos.BOTTOM);
                 GridPane.setMargin(msjChatGridLbl, new Insets(0, 0, 10, 100));
@@ -336,33 +348,18 @@ public class ChatController implements Initializable {
                 userChatGridPP.setRadius(35);
                 GridPane.setHalignment(userChatGridPP, HPos.LEFT);
                 GridPane.setMargin(userChatGridPP, new Insets(0, 0, 0, 13));
-                URL circleIconUrl = getClass().getResource("/media/car.png");
-                if (circleIconUrl != null) 
+                
+                if (usuarioChat.getFoto_perfil() != null) 
                 {
-                    Image img = new Image(circleIconUrl.toExternalForm());
-                    userChatGridPP.setFill(new ImagePattern(img));
-                } 
-                else 
-                    System.out.println("Image resource not found.");
+                    Image image = new Image(new ByteArrayInputStream(usuarioChat.getFoto_perfil()));
+                    userChatGridPP.setFill(new ImagePattern(image));
+                }
+                else
+                    userChatGridPP.setFill(Color.web("#e0e0e0"));
+                
                 chatsGridPane.add(userChatGridPP, 0, rowIndex);
                 
                 
-
-                ImageView trashIconChatGrid = new ImageView();
-                trashIconChatGrid.setFitHeight(24);
-                trashIconChatGrid.setFitWidth(24);
-                GridPane.setHalignment(trashIconChatGrid, HPos.RIGHT);
-                GridPane.setMargin(trashIconChatGrid, new Insets(0, 10, 0, 0));
-                URL trashIconUrl = getClass().getResource("/media/icon_trash.png");
-                if (trashIconUrl != null) 
-                {
-                    Image img = new Image(trashIconUrl.toExternalForm());
-                    trashIconChatGrid.setImage(img);
-                } 
-                else 
-                    System.out.println("Image resource not found.");
-                
-                chatsGridPane.add(trashIconChatGrid, 0, rowIndex);
                 rowIndex++;
             }
             
@@ -373,6 +370,27 @@ public class ChatController implements Initializable {
         }    
     }
     
+    public void deleteActiveChat()
+    {
+        openedChatPP.setVisible(false);
+        activeChatUserName.setVisible(false);
+        activeChatStatus.setVisible(false);
+        chatMsjTextField.setVisible(false);
+        sendButton.setVisible(false);
+        imgButton.setVisible(false);
+        activeChatDeleteIcon.setVisible(false);
+        try
+        {
+            chatNegocio.deleteChat(activeChatId);
+            chatsGridPane.getChildren().clear();
+            loadChatList();
+        }
+        catch(NegocioException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void setActiveChatVisible()
     {
         openedChatPP.setVisible(true);
@@ -381,30 +399,24 @@ public class ChatController implements Initializable {
         chatMsjTextField.setVisible(true);
         sendButton.setVisible(true);
         imgButton.setVisible(true);
+        activeChatDeleteIcon.setVisible(true);
     }
     
-    public void setActiveChat()
+    public void setActiveChat(Usuario activeChatUsuario)
     {
         try
         {
             activeChat = chatNegocio.getChatById(activeChatId);
-            URL circleIconUrl = getClass().getResource("/media/car.png");
-            if (circleIconUrl != null) 
-            {
-                Image img = new Image(circleIconUrl.toExternalForm());
-                openedChatPP.setFill(new ImagePattern(img));
-            } 
-            else 
-                System.out.println("Image resource not found.");
-            
-            for(Usuario usuario : activeChat.getMiembros())
-            {
-                if(!usuario.getId().equals(loggedInUser.getId()))
-                {
-                    activeChatUserName.setText(usuario.getNombre());
-                    break;
-                }
+
+            if (activeChatUsuario.getFoto_perfil() != null) {
+                Image image = new Image(new ByteArrayInputStream(activeChatUsuario.getFoto_perfil()));
+                openedChatPP.setFill(new ImagePattern(image));
+            } else {
+                openedChatPP.setFill(Color.web("#e0e0e0"));
             }
+
+            activeChatUserName.setText(activeChatUsuario.getNombre());
+
         }
         catch(NegocioException e)
         {
@@ -421,6 +433,7 @@ public class ChatController implements Initializable {
             {
                 Mensaje mensaje = mensajeNegocio.guardar(chatMsjTextField.getText(), loggedInUser.getId());
                 chatNegocio.updateChat(activeChat, mensaje);
+                chatMsjTextField.setText("");
             }
             catch(NegocioException e)
             {
@@ -432,8 +445,8 @@ public class ChatController implements Initializable {
             msj.setPrefHeight(Label.USE_COMPUTED_SIZE);
             msj.setMaxHeight(Label.USE_PREF_SIZE);
             GridPane.setHalignment(msj, HPos.RIGHT);
-            activeChatScrollPane.setVvalue(1);
             activeChatGrid.addRow(activeChatGrid.getRowCount(), msj);
+            activeChatScrollPane.setVvalue(activeChatScrollPane.getVmax());
         }
     }
 }

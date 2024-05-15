@@ -1,5 +1,8 @@
 package negocio;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -112,6 +115,25 @@ public class UsuarioNegocio implements IUsuarioNegocio
             throw new NegocioException(e.getMessage());
         }
         catch(NullPointerException e)
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        }
+    }
+    
+    public Usuario uploadPP(File imageFile, ObjectId usuario) throws NegocioException
+    {
+        try
+        {
+            byte[] imageData = Files.readAllBytes(imageFile.toPath());
+            return usuarioDAO.uploadPP(imageData, usuario);
+        }
+        catch(PersistenciaException e)
+        {
+            System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
+        }
+        catch(IOException e)
         {
             System.out.println(e.getMessage());
             throw new NegocioException(e.getMessage());

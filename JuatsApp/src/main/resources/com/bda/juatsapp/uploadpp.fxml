@@ -18,7 +18,7 @@
             </Label>
             <Pane prefHeight="29.0" prefWidth="594.0" style="-fx-background-color: #31ba45;" stylesheets="@../../../styles/ParentStyle.css" />
             <Circle fx:id="currentPP" fill="#e0e0e0" layoutX="297.0" layoutY="144.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Button fx:id="uploadPPBtn" layoutX="235.0" layoutY="230.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" styleClass="green-button" stylesheets="@../../../styles/ParentStyle.css" text="Subir Imagen" />
+            <Button fx:id="uploadPPBtn" layoutX="235.0" layoutY="230.0" mnemonicParsing="false" onAction="#uploadPP" prefHeight="43.0" prefWidth="125.0" styleClass="green-button" stylesheets="@../../../styles/ParentStyle.css" text="Subir Imagen" />
          </children>
       </Pane>
    </children>

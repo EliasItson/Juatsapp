@@ -14,7 +14,7 @@ public class Usuario
     private LocalDate fecha_nacimiento;
     private String sexo;
     private String codigo;
-    private ImagenMetadata fotoPerfil;
+    private byte[] foto_perfil;
     private Boolean isDeleted;
 
     public Usuario() 
@@ -98,12 +98,12 @@ public class Usuario
         this.codigo = codigo;
     }
 
-    public ImagenMetadata getFotoPerfil() {
-        return fotoPerfil;
+    public byte[] getFoto_perfil() {
+        return foto_perfil;
     }
 
-    public void setFotoPerfil(ImagenMetadata fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
+    public void setFoto_perfil(byte[] foto_perfil) {
+        this.foto_perfil = foto_perfil;
     }
 
     public Boolean getIsDeleted() {

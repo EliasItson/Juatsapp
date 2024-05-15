@@ -3,6 +3,7 @@ package persistencia;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
+import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Usuario;
@@ -72,6 +73,23 @@ public class UsuarioDAO implements IUsuarioDAO
         {
             Bson filter = and(Filters.eq("codigo", codigo));
             return COLECCION.find(filter).first();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println(e.getMessage());
+            throw new PersistenciaException(e.getMessage());
+        }
+    }
+    
+    public Usuario uploadPP(byte[] imageData, ObjectId usuario) throws PersistenciaException
+    {
+        try
+        {
+            Bson filter = Filters.eq("_id", usuario);
+            Bson update = Updates.set("foto_perfil", imageData);
+            COLECCION.updateOne(filter, update);
+            return COLECCION.find(filter).first();
+            
         }
         catch(NullPointerException e)
         {

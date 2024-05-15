@@ -112,10 +112,15 @@
                         <Font name="Inter Regular" size="16.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="activeChatDeleteIcon" fitHeight="24.0" fitWidth="24.0" layoutX="1028.0" layoutY="34.0" onMouseClicked="#deleteActiveChat" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../../../media/icon_trash.png" />
+                     </image>
+                  </ImageView>
                </children></Pane>
             <Pane layoutY="90.0" prefHeight="701.0" prefWidth="1080.0" styleClass="light-gray-top-left-border" stylesheets="@../../../styles/ParentStyle.css">
                <children>
-                  <ScrollPane fx:id="activeChatScrollPane" hbarPolicy="NEVER" layoutX="5.0" layoutY="13.0" prefHeight="691.0" prefWidth="1070.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="activeChatScrollPane" hbarPolicy="NEVER" layoutX="5.0" layoutY="13.0" prefHeight="684.0" prefWidth="1070.0" styleClass="white-background" stylesheets="@../../../styles/ParentStyle.css" vbarPolicy="NEVER">
                      <content>
                         <GridPane fx:id="activeChatGrid" minHeight="50.0" prefWidth="1070.0" stylesheets="@../../../styles/ParentStyle.css" vgap="2.0">
                           <columnConstraints>
