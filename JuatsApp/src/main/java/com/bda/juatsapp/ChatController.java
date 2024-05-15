@@ -136,10 +136,6 @@ public class ChatController implements Initializable {
                 contextMenu.show(userMenu, event.getScreenX(), event.getScreenY());
             }
         });
-        
-        
-
-
 
         URL imageUrl2 = getClass().getResource("/media/Menu.png");
         if (imageUrl2 != null) {
