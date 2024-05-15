@@ -11,5 +11,7 @@ public interface IUsuarioDAO
     public void createUsuario(Usuario usuario) throws PersistenciaException;
     public Usuario validateCredentials(String correo, String password) throws PersistenciaException;
     public Usuario getTrimmedUsuarioById(ObjectId usuarioId) throws PersistenciaException;
-
+    public Usuario getUsuarioByCodigo(String codigo) throws PersistenciaException;
+    public Usuario uploadPP(byte[] imageData, ObjectId usuario) throws PersistenciaException;
+    public Usuario getUsuarioByCorreo(String correo) throws PersistenciaException;
 }
