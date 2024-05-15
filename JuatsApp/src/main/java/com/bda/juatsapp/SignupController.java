@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import negocio.NegocioException;
 import negocio.UsuarioNegocio;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class SignupController implements Initializable
 {
@@ -48,11 +49,12 @@ public class SignupController implements Initializable
         {
             String nombre = nombreUsuarioTxtFld.getText();
             String correo = correoUsuarioTxtFld.getText();
-            String password = passUsuarioPassFld.getText();
+            String salt = BCrypt.gensalt();
+            String hashedPassword = BCrypt.hashpw(passUsuarioPassFld.getText(), salt);
             String telefono = telefonoUsuarioTxtFld.getText();
             LocalDate fechaNacimiento = fechaUsuarioDatePicker.getValue();
             String sexo = sexoUsuarioCmbBox.getValue();
-            usuarioNegocio.createUsuario(nombre, correo, password, telefono, fechaNacimiento, sexo);
+            usuarioNegocio.createUsuario(nombre, correo, hashedPassword, salt, telefono, fechaNacimiento, sexo);
             App.setRoot("login");
         }
         catch(NegocioException e)

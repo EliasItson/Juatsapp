@@ -97,4 +97,18 @@ public class UsuarioDAO implements IUsuarioDAO
             throw new PersistenciaException(e.getMessage());
         }
     }
+    
+    public Usuario getUsuarioByCorreo(String correo) throws PersistenciaException
+    {
+        try
+        {
+            Bson filter = and(Filters.eq("correo", correo));
+            return COLECCION.find(filter).first();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println(e.getMessage());
+            throw new PersistenciaException(e.getMessage());
+        }
+    }
 }

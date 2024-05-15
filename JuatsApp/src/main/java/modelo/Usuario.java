@@ -10,6 +10,7 @@ public class Usuario
     private String nombre;
     private String correo;
     private String password;
+    private String salt;
     private String telefono;
     private LocalDate fecha_nacimiento;
     private String sexo;
@@ -22,11 +23,12 @@ public class Usuario
         this.isDeleted = false;
     }
     
-    public Usuario(String nombre, String correo, String password, String telefono, LocalDate fechaNacimiento, String sexo, String codigo) 
+    public Usuario(String nombre, String correo, String password, String salt, String telefono, LocalDate fechaNacimiento, String sexo, String codigo) 
     {
         this.nombre = nombre;
         this.correo = correo;
         this.password = password;
+        this.salt = salt;
         this.telefono = telefono;
         this.fecha_nacimiento = fechaNacimiento;
         this.sexo = sexo;
@@ -114,6 +116,17 @@ public class Usuario
         this.isDeleted = isDeleted;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    
+    
+
+    
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", telefono=" + telefono + ", fecha_nacimiento=" + fecha_nacimiento + ", sexo=" + sexo + ", codigo=" + codigo + ", isDeleted=" + isDeleted + '}';

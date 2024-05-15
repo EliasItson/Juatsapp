@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import modelo.Usuario;
 import org.bson.types.ObjectId;
+import org.mindrot.jbcrypt.BCrypt;
 import persistencia.PersistenciaException;
 import persistencia.UsuarioDAO;
 
@@ -42,7 +43,7 @@ public class UsuarioNegocio implements IUsuarioNegocio
     }
     
     @Override
-    public void createUsuario(String nombre, String correo, String password, String telefono, LocalDate fechaNacimiento, String sexo) throws NegocioException
+    public void createUsuario(String nombre, String correo, String password, String salt, String telefono, LocalDate fechaNacimiento, String sexo) throws NegocioException
     {
         Random random = new Random();
         int randomNumber = random.nextInt(16777216);
@@ -50,7 +51,7 @@ public class UsuarioNegocio implements IUsuarioNegocio
         
         try 
         {
-            Usuario usuario = new Usuario( nombre, correo, password,  telefono, fechaNacimiento, sexo, codigo);
+            Usuario usuario = new Usuario( nombre, correo, password, salt,  telefono, fechaNacimiento, sexo, codigo);
             if (usuario == null) 
             {
                 throw new NegocioException("No se proporciono un usuario valido");
@@ -76,7 +77,11 @@ public class UsuarioNegocio implements IUsuarioNegocio
     {
         try 
         {
-            return usuarioDAO.validateCredentials(correo, password);
+            Usuario usuario = usuarioDAO.getUsuarioByCorreo(correo);
+            if (BCrypt.checkpw(password, usuario.getPassword())) 
+                return usuario;
+            else
+                return null;
 
         } 
         catch (PersistenciaException e) 
