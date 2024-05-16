@@ -1,6 +1,7 @@
 package persistencia;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
@@ -36,7 +37,8 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public List<Usuario> getAllUsuarios() throws PersistenciaException {
         List<Usuario> usuarios = new ArrayList<>();
-        COLECCION.find().into(usuarios);
+        Bson filter = Filters.eq("isDeleted", false);
+        COLECCION.find(filter).into(usuarios);
 
         return usuarios;
     }
@@ -51,7 +53,14 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public Boolean createUsuario(Usuario usuario) throws PersistenciaException 
     {
-        long existingUsuarios = COLECCION.countDocuments(or(eq("correo", usuario.getCorreo()), eq("telefono", usuario.getTelefono())));
+        
+        Bson filter = Filters.and(
+                Filters.or(
+                        Filters.eq("correo", usuario.getCorreo()),
+                        Filters.eq("telefono", usuario.getTelefono())
+                ),
+                Filters.eq("isDeleted", false));
+        long existingUsuarios = COLECCION.countDocuments(filter);
     
         if (existingUsuarios == 0) 
         {
@@ -73,8 +82,11 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public Usuario validateCredentials(String correo, String password) throws PersistenciaException {
         try {
-            Bson filter = and(Filters.eq("correo", correo), Filters.eq("password", password));
-            return COLECCION.find(filter).first();
+            List<Bson> pipeline = new ArrayList<>();
+            pipeline.add(Aggregates.match(Filters.eq("correo", correo)));
+            pipeline.add(Aggregates.match(Filters.eq("password", password)));
+            pipeline.add(Aggregates.match(Filters.eq("isDeleted", false)));
+            return COLECCION.aggregate(pipeline).first();
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             throw new PersistenciaException(e.getMessage());
@@ -91,8 +103,10 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public Usuario getTrimmedUsuarioById(ObjectId usuarioId) throws PersistenciaException {
         try {
-            Bson filter = and(Filters.eq("_id", usuarioId));
-            return COLECCION.find(filter).first();
+            List<Bson> pipeline = new ArrayList<>();
+            pipeline.add(Aggregates.match(Filters.eq("_id", usuarioId)));
+            pipeline.add(Aggregates.match(Filters.eq("isDeleted", false)));
+            return COLECCION.aggregate(pipeline).first();
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             throw new PersistenciaException(e.getMessage());
@@ -108,9 +122,12 @@ public class UsuarioDAO implements IUsuarioDAO {
      */
     @Override
     public Usuario getUsuarioByCodigo(String codigo) throws PersistenciaException {
-        try {
-            Bson filter = and(Filters.eq("codigo", codigo));
-            return COLECCION.find(filter).first();
+        try 
+        {
+            List<Bson> pipeline = new ArrayList<>();
+            pipeline.add(Aggregates.match(Filters.regex("codigo", "^" + codigo + "$", "i")));
+            pipeline.add(Aggregates.match(Filters.eq("isDeleted", false)));
+            return COLECCION.aggregate(pipeline).first();
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             throw new PersistenciaException(e.getMessage());
@@ -149,8 +166,10 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public Usuario getUsuarioByCorreo(String correo) throws PersistenciaException {
         try {
-            Bson filter = and(Filters.eq("correo", correo));
-            return COLECCION.find(filter).first();
+            List<Bson> pipeline = new ArrayList<>();
+            pipeline.add(Aggregates.match(Filters.eq("correo", correo)));
+            pipeline.add(Aggregates.match(Filters.eq("isDeleted", false)));
+            return COLECCION.aggregate(pipeline).first();
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             throw new PersistenciaException(e.getMessage());

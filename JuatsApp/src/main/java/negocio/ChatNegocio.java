@@ -50,17 +50,23 @@ public class ChatNegocio implements IChatNegocio {
      *
      * @param usuario1 Usuario que crea el chat.
      * @param codigo   Código del segundo usuario en el chat.
+     * @return true si se creo el chat
      * @throws NegocioException Si ocurre un error durante la operación.
      */
     @Override
-    public void createChat(Usuario usuario1, String codigo) throws NegocioException {
-        try {
+    public boolean createChat(Usuario usuario1, String codigo) throws NegocioException 
+    {
+        try 
+        {
+            
             Usuario usuario2 = usuarioNegocio.getUsuarioByCodigo(codigo);
+            if(usuario2 == null)
+                return false;
             List<Usuario> miembros = new ArrayList<>();
             miembros.add(usuario1);
             miembros.add(usuario2);
             Chat nuevoChat = new Chat(miembros);
-            chatDAO.createChat(nuevoChat);
+            return chatDAO.createChat(nuevoChat);
         } catch (PersistenciaException e) {
             System.out.println(e.getMessage());
             throw new NegocioException(e.getMessage());

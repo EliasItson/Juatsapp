@@ -48,6 +48,7 @@ public class Mensaje
         this.emisorId = emisorId;
         this.imagen = imagen;
         this.fechaTiempoEnvio = fechaTiempoEnvio;
+        this.isDeleted = false;
     }
 
     /**

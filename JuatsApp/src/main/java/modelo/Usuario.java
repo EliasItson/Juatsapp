@@ -236,4 +236,30 @@ public class Usuario
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", telefono=" + telefono + ", fecha_nacimiento=" + fecha_nacimiento + ", sexo=" + sexo + ", codigo=" + codigo + ", isDeleted=" + isDeleted + '}';
     }
+    
+    /**
+     * Comprueba si este usuario es igual a otro objeto.
+     * @param obj El objeto a comparar.
+     * @return true si los objetos son iguales, de lo contrario false.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Usuario usuario = (Usuario) obj;
+        return id.equals(usuario.id);
+    }
+
+    /**
+     * Devuelve el código hash para este usuario.
+     * @return El código hash basado en el campo id.
+     */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

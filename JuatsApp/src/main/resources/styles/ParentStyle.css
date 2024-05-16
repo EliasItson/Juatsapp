@@ -19,6 +19,7 @@
 
 .context-menu .menu-item:hover {
 	-fx-background-color: lightgray; /* Set background color of hovered menu items */
+	-fx-text-fill: black;
 }
 
 .chat-list-circle-left{

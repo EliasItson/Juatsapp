@@ -3,18 +3,14 @@ package com.bda.juatsapp;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,12 +29,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -323,20 +316,31 @@ public class ChatController implements Initializable {
      * Crea un nuevo chat
      * 
      * @param codigo el codigo de usuario con el cual se va a chatear
+     * @return true si se creo el chat.
+     * @throws NegocioException Si ocurre un error durante la operacion.
      */
-    public void createChat(String codigo)
+    public Boolean createChat(String codigo) throws NegocioException
     {
         try
         {
-            chatNegocio.createChat(loggedInUser, codigo);
-            chatsGridPane.getChildren().clear();
-            loadChatList();
+            if(loggedInUser.getCodigo().equalsIgnoreCase(codigo))
+            {
+                return false;
+            }
+            if(chatNegocio.createChat(loggedInUser, codigo))
+            {
+                chatsGridPane.getChildren().clear();
+                loadChatList();   
+                return true;
+            }
             
+            return false;
             
         }
         catch(NegocioException e)
         {
             System.out.println(e.getMessage());
+            throw new NegocioException(e.getMessage());
         }
         
     }

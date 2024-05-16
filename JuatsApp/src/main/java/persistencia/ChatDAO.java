@@ -6,9 +6,13 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import modelo.Chat;
 import modelo.Mensaje;
+import modelo.Usuario;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
@@ -45,11 +49,32 @@ public class ChatDAO implements IChatDAO {
      * Crea un nuevo chat.
      *
      * @param chat El chat a crear.
+     * @return true si se creo el chat.
      * @throws PersistenciaException Si ocurre un error durante la operación.
      */
     @Override
-    public void createChat(Chat chat) throws PersistenciaException {
+    public Boolean createChat(Chat chat) throws PersistenciaException 
+    {
+        List<Chat> existingChats = COLECCION.find(Filters.eq("isDeleted", false)).into(new ArrayList<>());
+
+        // Get the miembros list of the new chat and sort it
+        List<Usuario> newChatMiembros = new ArrayList<>(chat.getMiembros());
+        newChatMiembros.sort(Comparator.comparing(Usuario::getId));
+
+        // Check if any existing chat has the same miembros
+        for (Chat existingChat : existingChats) {
+            List<Usuario> existingChatMiembros = new ArrayList<>(existingChat.getMiembros());
+            existingChatMiembros.sort(Comparator.comparing(Usuario::getId));
+
+            if (newChatMiembros.equals(existingChatMiembros)) {
+                // The chat with the same miembros already exists
+                return false;
+            }
+        }
+
+        // Insert the new chat if no match is found
         COLECCION.insertOne(chat);
+        return true;
     }
 
     /**
