@@ -94,6 +94,15 @@ public class MensajeNegocio implements IMensajeNegocio {
         }
     }
     
+    /**
+     * Guarda un nuevo mensaje con imagen.
+     *
+     * @param imagen   imagen a enviar.
+     * @param emisorId  ID del emisor del mensaje.
+     * @return Mensaje guardado.
+     * @throws NegocioException Si ocurre un error durante la operación.
+     */
+    @Override
     public Mensaje guardar(byte[] imagen, ObjectId emisorId) throws NegocioException {
         try {
             if (imagen == null) {
