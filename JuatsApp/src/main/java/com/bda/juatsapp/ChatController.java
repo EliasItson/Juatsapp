@@ -455,17 +455,19 @@ public class ChatController implements Initializable {
      */
     public void deleteActiveChat()
     {
-        openedChatPP.setVisible(false);
-        activeChatUserName.setVisible(false);
-        activeChatStatus.setVisible(false);
-        chatMsjTextField.setVisible(false);
-        sendButton.setVisible(false);
-        imgButton.setVisible(false);
-        activeChatDeleteIcon.setVisible(false);
+        
         try
         {
             chatNegocio.deleteChat(activeChatId);
             chatsGridPane.getChildren().clear();
+            activeChatGrid.getChildren().clear();
+            openedChatPP.setVisible(false);
+            activeChatUserName.setVisible(false);
+            activeChatStatus.setVisible(false);
+            chatMsjTextField.setVisible(false);
+            sendButton.setVisible(false);
+            imgButton.setVisible(false);
+            activeChatDeleteIcon.setVisible(false);
             loadChatList();
         }
         catch(NegocioException e)
