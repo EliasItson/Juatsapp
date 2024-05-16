@@ -37,7 +37,6 @@ public class CrearChatController {
         codigoTxtFld.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!codigoPattern.matcher(newValue).matches()) {
                 codigoTxtFld.setStyle("-fx-background-color: #FFC0CB;");
-                warningCrearChat.setVisible(true);
             } else {
                 codigoTxtFld.setStyle(""); 
                 warningCrearChat.setVisible(false);
@@ -56,7 +55,10 @@ public class CrearChatController {
             {
                 if(controller.createChat(codigoTxtFld.getText()))
                 {  
+                    codigoTxtFld.setStyle(""); 
                     warningCrearChat.setVisible(false);
+                    codigoTxtFld.clear();
+                    return;
                 }              
             }
             warningCrearChat.setVisible(true);
