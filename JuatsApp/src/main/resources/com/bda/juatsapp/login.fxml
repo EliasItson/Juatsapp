@@ -74,6 +74,11 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
+                  <Label fx:id="warningLogin" text="El correo o contraseña son incorrectos." textFill="#ff6060" visible="false">
+                     <font>
+                        <Font name="Inter Regular" size="16.0" />
+                     </font>
+                  </Label>
                   <HBox alignment="CENTER" prefHeight="24.0" prefWidth="400.0">
                      <children>
                         <Separator halignment="LEFT" prefHeight="1.0" prefWidth="70.0">
@@ -92,7 +97,7 @@
                         <Separator halignment="RIGHT" prefHeight="1.0" prefWidth="70.0" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets bottom="20.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
                   <Button fx:id="switchToSignupBtn" mnemonicParsing="false" onMouseClicked="#switchToSignup" prefHeight="40.0" styleClass="green-button" stylesheets="@../../../styles/ParentStyle.css" text="Registrar">

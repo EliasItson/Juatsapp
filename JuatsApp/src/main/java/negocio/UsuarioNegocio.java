@@ -95,9 +95,10 @@ public class UsuarioNegocio implements IUsuarioNegocio {
      */
     @Override
     public Usuario validateCredentials(String correo, String password) throws NegocioException {
-        try {
+        try 
+        {
             Usuario usuario = usuarioDAO.getUsuarioByCorreo(correo);
-            if (BCrypt.checkpw(password, usuario.getPassword()))
+            if(usuario != null && BCrypt.checkpw(password, usuario.getPassword()))   
                 return usuario;
             else
                 return null;

@@ -102,7 +102,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Label fx:id="warningSignup" text="Revisa que tus datos sean coherentes." textFill="#ff6060" visible="false">
+                  <Label fx:id="warningSignup" text="Verifique que sus datos sean coherentes." textFill="#ff6060" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
