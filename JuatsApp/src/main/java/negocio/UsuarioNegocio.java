@@ -52,29 +52,34 @@ public class UsuarioNegocio implements IUsuarioNegocio {
      * @param nombre          Nombre del usuario.
      * @param correo          Correo electrónico del usuario.
      * @param password        Contraseña del usuario.
-     * @param salt            Sal para el hash de la contraseña.
+     * @param salt            Salt para el hash de la contraseña.
      * @param telefono        Número de teléfono del usuario.
      * @param fechaNacimiento Fecha de nacimiento del usuario.
      * @param sexo            Género del usuario.
+     * @return true si se creao el usuario.
      * @throws NegocioException Si ocurre un error durante la operación.
      */
     @Override
-    public void createUsuario(String nombre, String correo, String password, String salt, String telefono, LocalDate fechaNacimiento, String sexo) throws NegocioException {
+    public Boolean createUsuario(String nombre, String correo, String password, String salt, String telefono, LocalDate fechaNacimiento, String sexo) throws NegocioException 
+    {
         Random random = new Random();
         int randomNumber = random.nextInt(16777216);
         String codigo = String.format("%06X", randomNumber);
 
-        try {
+        try 
+        {
             Usuario usuario = new Usuario(nombre, correo, password, salt, telefono, fechaNacimiento, sexo, codigo);
-            if (usuario == null) {
-                throw new NegocioException("No se proporcionó un usuario válido");
-            }
-            usuarioDAO.createUsuario(usuario);
+            
+            if(fechaNacimiento.isAfter(LocalDate.now()))
+                return false;
+            return usuarioDAO.createUsuario(usuario);
 
-        } catch (PersistenciaException e) {
+        } catch (PersistenciaException e) 
+        {
             System.out.println(e.getMessage());
             throw new NegocioException(e.getMessage());
-        } catch (NullPointerException e) {
+        } catch (NullPointerException e) 
+        {
             System.out.println(e.getMessage());
             throw new NegocioException(e.getMessage());
         }

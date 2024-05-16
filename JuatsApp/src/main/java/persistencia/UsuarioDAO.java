@@ -3,6 +3,8 @@ package persistencia;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.or;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +45,21 @@ public class UsuarioDAO implements IUsuarioDAO {
      * Crea un nuevo usuario en la base de datos.
      *
      * @param usuario El usuario a crear.
+     * @return true si se creo el usuario.
      * @throws PersistenciaException Si ocurre un error durante la operación.
      */
     @Override
-    public void createUsuario(Usuario usuario) throws PersistenciaException {
-        COLECCION.insertOne(usuario);
+    public Boolean createUsuario(Usuario usuario) throws PersistenciaException 
+    {
+        long existingUsuarios = COLECCION.countDocuments(or(eq("correo", usuario.getCorreo()), eq("telefono", usuario.getTelefono())));
+    
+        if (existingUsuarios == 0) 
+        {
+            COLECCION.insertOne(usuario);
+            return true;
+        } 
+        else 
+            return false;
     }
 
     /**

@@ -87,7 +87,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <DatePicker fx:id="fechaUsuarioDatePicker" prefHeight="40.0" prefWidth="400.0" promptText="Fecha de Nacimiento" styleClass="text-field" stylesheets="@../../../styles/ParentStyle.css">
+                  <DatePicker fx:id="fechaUsuarioDatePicker" editable="false" prefHeight="40.0" prefWidth="400.0" promptText="Fecha de Nacimiento" styleClass="text-field" stylesheets="@../../../styles/ParentStyle.css">
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
@@ -102,6 +102,11 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
+                  <Label fx:id="warningSignup" text="Revisa que tus datos sean coherentes." textFill="#ff6060" visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                   <HBox alignment="CENTER" prefHeight="24.0" prefWidth="400.0">
                      <children>
                         <Separator halignment="LEFT" prefHeight="1.0" prefWidth="115.0">
@@ -120,7 +125,7 @@
                         <Separator halignment="RIGHT" prefHeight="1.0" prefWidth="115.0" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets bottom="20.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
                   <Button fx:id="moveToLoginBtn" mnemonicParsing="false" onMouseClicked="#switchToLogin" prefHeight="40.0" styleClass="green-button" stylesheets="@../../../styles/ParentStyle.css" text="Ingresar">
@@ -136,6 +141,26 @@
             <Label layoutX="509.0" layoutY="777.0" prefHeight="46.0" prefWidth="410.0" text="Al registrarse, usted acepta los Terminos de Servicio y Politicas de Privacidad." textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Inter Regular" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="warningCorreo" layoutX="926.0" layoutY="349.0" text="Este campo solo acepta correos validos sin espacios." textFill="#ff6060" visible="false">
+               <font>
+                  <Font name="Inter Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="warningPass" layoutX="926.0" layoutY="388.0" prefHeight="40.0" prefWidth="424.0" text="La contraseña debe de ser de 8 a 16 caracteres y contener al menos una mayuscula, minuscula, numero y caracter especial." textFill="#ff6060" visible="false" wrapText="true">
+               <font>
+                  <Font name="Inter Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="warningNombre" layoutX="926.0" layoutY="298.0" text="Este campo no acepta numeros ni caracteres especiales." textFill="#ff6060" visible="false">
+               <font>
+                  <Font name="Inter Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="warningTelefono" layoutX="926.0" layoutY="450.0" text="Debe de ser un numero valido de 10 digitos." textFill="#ff6060" visible="false">
+               <font>
+                  <Font name="Inter Regular" size="12.0" />
                </font>
             </Label>
          </children>
