@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.bda.juatsapp","l":"com.bda.juatsapp"},{"m":"com.bda.juatsapp","l":"modelo"}];updateSearchResults();
